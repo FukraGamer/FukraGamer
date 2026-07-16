@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FukraGamer | BGMI Esports</title>
     <style>
-        /* Stake.com varge Colors */
+        /* Stake Colors */
         :root {
             --bg-main: #1a2c38;
             --bg-sidebar: #0f212e;
@@ -31,7 +31,9 @@
             overflow-x: hidden;
         }
 
-        /* --- Preloader (Stake Style Splash Screen) --- */
+        /* =========================================
+           ULTRA-PREMIUM PRELOADER (STAKE STYLE)
+        ========================================= */
         .preloader {
             position: fixed;
             top: 0;
@@ -43,33 +45,64 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            animation: hidePreloader 0.5s ease-in-out 2.5s forwards;
+            /* 2.5 second baad screen hide hovegi */
+            animation: hideScreen 0.5s ease-in-out 2.5s forwards;
         }
 
-        .loader-logo {
-            font-size: 50px;
-            font-weight: bold;
-            color: var(--text-main);
+        .logo-wrapper {
+            position: relative;
+        }
+
+        /* 1. Logo Outline (Jo pehla disegi) */
+        .logo-outline {
+            position: relative;
+            font-size: 55px;
+            font-weight: 900;
             letter-spacing: 2px;
-            opacity: 0;
-            transform: scale(0.5);
-            animation: showLogo 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
+            color: transparent;
+            /* Halki jehi white outline */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15); 
+        }
+        .logo-outline span {
+            -webkit-text-stroke: 1px rgba(0, 231, 1, 0.25);
         }
 
-        .loader-logo span, .logo span {
+        /* 2. Logo Solid (Jo pen wangu draw hovega) */
+        .logo-solid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 55px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #ffffff;
+            
+            /* Shuru ch hide karega */
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+            
+            /* Draw hon di timing te animation */
+            animation: drawLogo 1s cubic-bezier(0.77, 0, 0.175, 1) 0.5s forwards;
+        }
+        .logo-solid span {
             color: var(--accent-green);
         }
 
-        @keyframes showLogo {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
+        /* Animation: Left ton Right Sweep (Drawing Effect) */
+        @keyframes drawLogo {
+            0% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
         }
 
-        @keyframes hidePreloader {
+        /* Animation: Poori Loading Screen Hataun layi */
+        @keyframes hideScreen {
             to { opacity: 0; visibility: hidden; }
         }
 
-        /* --- Sidebar Design --- */
+        /* =========================================
+           MAIN WEBSITE DESIGN (SAME AS BEFORE)
+        ========================================= */
         .sidebar {
             width: 250px;
             background-color: var(--bg-sidebar);
@@ -88,6 +121,10 @@
             letter-spacing: 1px;
         }
 
+        .logo span {
+            color: var(--accent-green);
+        }
+
         .menu-item {
             color: var(--text-muted);
             text-decoration: none;
@@ -103,7 +140,6 @@
             color: var(--text-main);
         }
 
-        /* --- Main Content Area --- */
         .main-content {
             flex: 1;
             padding: 40px;
@@ -133,7 +169,6 @@
             transform: translateY(-2px);
         }
 
-        /* --- Banner Style --- */
         .banner {
             background: linear-gradient(135deg, #213743, #0f212e);
             padding: 40px;
@@ -154,7 +189,6 @@
             margin-bottom: 25px;
         }
 
-        /* --- Cards Layout (Grid) --- */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -184,7 +218,6 @@
             line-height: 1.6;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #2a3d4a; }
@@ -194,12 +227,13 @@
 </head>
 <body>
 
-    <!-- Preloader Animation (FukraGamer Logo) -->
     <div class="preloader">
-        <div class="loader-logo">Fukra<span>Gamer</span></div>
+        <div class="logo-wrapper">
+            <div class="logo-outline">Fukra<span>Gamer</span></div>
+            <div class="logo-solid">Fukra<span>Gamer</span></div>
+        </div>
     </div>
 
-    <!-- Left Sidebar -->
     <div class="sidebar">
         <div class="logo">Fukra<span>Gamer</span></div>
         <a href="#" class="menu-item active">🏠 Home</a>
@@ -209,12 +243,9 @@
         <a href="#" class="menu-item">💬 Support</a>
     </div>
 
-    <!-- Right Main Content -->
     <div class="main-content">
-        
         <div class="header">
             <h2>Welcome to the Arena</h2>
-            <!-- Google form link ethe pao -->
             <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Register Team</a>
         </div>
 
@@ -247,7 +278,6 @@
                 <p>💀 MVP: ₹500</p>
             </div>
         </div>
-
     </div>
 
 </body>
