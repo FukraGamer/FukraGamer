@@ -32,7 +32,7 @@
         }
 
         /* =========================================
-           ULTRA-PREMIUM PRELOADER (STAKE STYLE)
+           REAL SVG PEN-DRAWING PRELOADER (STAKE STYLE)
         ========================================= */
         .preloader {
             position: fixed;
@@ -45,63 +45,64 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            /* 2.5 second baad screen hide hovegi */
-            animation: hideScreen 0.5s ease-in-out 2.5s forwards;
+            /* 3 second baad screen hide hovegi */
+            animation: hideScreen 0.5s ease-in-out 3s forwards;
         }
 
-        .logo-wrapper {
-            position: relative;
+        .logo-svg {
+            width: 350px;
+            height: 100px;
         }
 
-        /* 1. Logo Outline (Jo pehla disegi) */
-        .logo-outline {
-            position: relative;
+        /* SVG Text Style */
+        .svg-text {
             font-size: 55px;
             font-weight: 900;
             letter-spacing: 2px;
-            color: transparent;
-            /* Halki jehi white outline */
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15); 
-        }
-        .logo-outline span {
-            -webkit-text-stroke: 1px rgba(0, 231, 1, 0.25);
         }
 
-        /* 2. Logo Solid (Jo pen wangu draw hovega) */
-        .logo-solid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-size: 55px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #ffffff;
-            
-            /* Shuru ch hide karega */
-            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-            
-            /* Draw hon di timing te animation */
-            animation: drawLogo 1s cubic-bezier(0.77, 0, 0.175, 1) 0.5s forwards;
-        }
-        .logo-solid span {
-            color: var(--accent-green);
+        /* White Part Animation */
+        .text-white {
+            fill: transparent;
+            stroke: #ffffff;
+            stroke-width: 1.5px;
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+            /* 1.5s layi draw hovega, fer color bharega */
+            animation: drawLine 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards, fillWhite 0.5s ease-in-out 1.5s forwards;
         }
 
-        /* Animation: Left ton Right Sweep (Drawing Effect) */
-        @keyframes drawLogo {
-            0% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        /* Green Part Animation */
+        .text-green {
+            fill: transparent;
+            stroke: var(--accent-green);
+            stroke-width: 1.5px;
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+            /* Same timing te draw hovega */
+            animation: drawLine 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards, fillGreen 0.5s ease-in-out 1.5s forwards;
         }
 
-        /* Animation: Poori Loading Screen Hataun layi */
+        /* Drawing Animation */
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Filling Colors Animation */
+        @keyframes fillWhite {
+            to { fill: #ffffff; stroke: transparent; }
+        }
+        @keyframes fillGreen {
+            to { fill: var(--accent-green); stroke: transparent; }
+        }
+
+        /* Hide Loading Screen */
         @keyframes hideScreen {
             to { opacity: 0; visibility: hidden; }
         }
 
         /* =========================================
-           MAIN WEBSITE DESIGN (SAME AS BEFORE)
+           MAIN WEBSITE DESIGN
         ========================================= */
         .sidebar {
             width: 250px;
@@ -227,13 +228,16 @@
 </head>
 <body>
 
+    <!-- REAL SVG DRAWING PRELOADER -->
     <div class="preloader">
-        <div class="logo-wrapper">
-            <div class="logo-outline">Fukra<span>Gamer</span></div>
-            <div class="logo-solid">Fukra<span>Gamer</span></div>
-        </div>
+        <svg class="logo-svg" viewBox="0 0 350 100">
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="svg-text">
+                <tspan class="text-white">Fukra</tspan><tspan class="text-green">Gamer</tspan>
+            </text>
+        </svg>
     </div>
 
+    <!-- MAIN WEBSITE -->
     <div class="sidebar">
         <div class="logo">Fukra<span>Gamer</span></div>
         <a href="#" class="menu-item active">🏠 Home</a>
