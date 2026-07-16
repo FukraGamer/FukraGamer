@@ -3,302 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FukraGamer | BGMI Esports</title>
-    
-    <!-- Google Fonts ton Stylish Font Import kita -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,800&display=swap" rel="stylesheet">
+    <title>FukraGamer</title>
+    <!-- Heavy Bold Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
 
     <style>
-        /* Stake.com Varge Colors */
         :root {
-            --bg-main: #1a2c38;
-            --bg-sidebar: #0f212e;
-            --bg-card: #213743;
-            --text-main: #ffffff;
-            --text-muted: #b1bad3;
+            --bg-main: #0f212e; /* Stake Dark Blue */
             --accent-green: #00e701;
-            --accent-hover: #1fff20;
+            --text-main: #ffffff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* Poori site layi aam font */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* =========================================
-           EXACT STAKE PRELOADER (FIXED SIZE & FONT)
-        ========================================= */
+        /* --- PRELOADER (DITTO STAKE STYLE) --- */
         .preloader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             background-color: var(--bg-main);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            animation: hidePreloader 0.4s ease-in-out 2s forwards;
+            animation: fadeOutScreen 0.5s ease-in-out 2.5s forwards;
         }
 
-        .brand-logo-container {
-            position: relative; /* Star nu set karan layi */
+        .container {
+            position: relative;
             display: flex;
-            align-items: baseline;
-            opacity: 0;
-            transform: scale(0.7);
-            animation: stakePop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
-        }
-
-        .brand-logo {
-            /* Navi Stylish te Elegant Look */
-            font-family: 'Poppins', sans-serif;
-            font-style: italic; /* Stake wangu thoda terha */
-            font-size: 38px; /* Size chota kita Stake wangu */
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: -1px;
-        }
-
-        .brand-logo .dot {
-            color: var(--accent-green);
-            font-size: 45px;
-            font-style: normal;
-        }
-
-        /* Stake aala chota Star (Sparkle) */
-        .sparkle {
-            position: absolute;
-            top: -5px;
-            right: -25px;
-            color: #ffffff;
-            font-size: 18px;
-            opacity: 0;
-            /* Star vakhra chamkega */
-            animation: showSparkle 0.5s ease-out 0.8s forwards;
-        }
-
-        /* Pop, Scale te Blur Effect */
-        @keyframes stakePop {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-                filter: blur(5px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-                filter: blur(0px);
-            }
-        }
-
-        /* Star Pop Animation */
-        @keyframes showSparkle {
-            0% { opacity: 0; transform: scale(0) rotate(-45deg); }
-            100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
-        }
-
-        /* Screen Fade Out */
-        @keyframes hidePreloader {
-            0% { opacity: 1; visibility: visible; }
-            100% { opacity: 0; visibility: hidden; }
-        }
-
-        /* =========================================
-           MAIN WEBSITE DESIGN
-        ========================================= */
-        .sidebar {
-            width: 250px;
-            background-color: var(--bg-sidebar);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid #2a3d4a;
-        }
-
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-style: italic;
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 40px;
-            text-align: center;
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: var(--accent-green);
-        }
-
-        .menu-item {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background-color: var(--bg-card);
-            color: var(--text-main);
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
         }
 
-        .btn-register {
-            background-color: var(--accent-green);
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+        .brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -1.5px;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
         }
 
-        .btn-register:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
+        .dot { color: var(--accent-green); }
+
+        /* Stars (Sparkles) */
+        .star {
+            position: absolute;
+            color: var(--text-main);
+            font-size: 20px;
+            opacity: 0;
+            animation: sparklePop 0.5s ease-out forwards;
+        }
+        /* Star positions */
+        .star-1 { top: -20px; left: 10px; animation-delay: 0.6s; }
+        .star-2 { top: -10px; right: -20px; animation-delay: 0.8s; }
+        .star-3 { bottom: -10px; left: -20px; animation-delay: 1s; }
+
+        @keyframes popIn {
+            to { opacity: 1; transform: scale(1); }
         }
 
-        .banner {
-            background: linear-gradient(135deg, #213743, #0f212e);
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 40px;
-            border: 1px solid #2a3d4a;
+        @keyframes sparklePop {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.8; transform: scale(1); }
         }
 
-        .banner h1 {
-            font-size: 36px;
-            margin-bottom: 15px;
+        @keyframes fadeOutScreen {
+            to { opacity: 0; visibility: hidden; }
         }
 
-        .banner p {
-            color: var(--text-muted);
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #2a3d4a;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            background-color: #2a4453;
-        }
-
-        .card h3 {
-            color: var(--accent-green);
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #2a3d4a; }
-            .header { flex-direction: column; gap: 20px; text-align: center; }
-        }
+        /* --- Main Content (Hidden until load) --- */
+        body { background-color: var(--bg-main); margin: 0; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
-    <!-- STAKE STYLE PRELOADER -->
     <div class="preloader">
-        <div class="brand-logo-container">
-            <div class="brand-logo">FukraGamer<span class="dot">.</span></div>
-            <!-- Stake aala star -->
-            <div class="sparkle">✦</div> 
+        <div class="container">
+            <span class="star star-1">✦</span>
+            <span class="star star-2">✦</span>
+            <span class="star star-3">✦</span>
+            <div class="brand">FukraGamer<span class="dot">.</span></div>
         </div>
     </div>
 
-    <!-- MAIN WEBSITE -->
-    <div class="sidebar">
-        <div class="logo">FukraGamer<span>.</span></div>
-        <a href="#" class="menu-item active">🏠 Home</a>
-        <a href="#" class="menu-item">🏆 Tournaments</a>
-        <a href="#" class="menu-item">📊 Leaderboard</a>
-        <a href="#" class="menu-item">📜 Rules</a>
-        <a href="#" class="menu-item">💬 Support</a>
-    </div>
-
-    <div class="main-content">
-        <div class="header">
-            <h2>Welcome to the Arena</h2>
-            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Register Team</a>
-        </div>
-
-        <div class="banner">
-            <h1>BGMI Showdown 2026</h1>
-            <p>Prize Pool: ₹10,000 | Entry Fee: ₹100 per Squad</p>
-            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Join Now</a>
-        </div>
-
-        <div class="grid-container">
-            <div class="card">
-                <h3>Match Schedule</h3>
-                <p><strong>Qualifiers:</strong> 20 July, 8:00 PM</p>
-                <p><strong>Semi-Finals:</strong> 22 July, 9:00 PM</p>
-                <p><strong>Grand Finals:</strong> 25 July, 10:00 PM</p>
-            </div>
-
-            <div class="card">
-                <h3>Tournament Rules</h3>
-                <p>- Mobile players only (No iPad/Emulators).</p>
-                <p>- Room details shared on WhatsApp 15 mins before match.</p>
-                <p>- 1 Point per Kill, 15 Points for Chicken Dinner.</p>
-            </div>
-
-            <div class="card">
-                <h3>Prize Distribution</h3>
-                <p>🥇 1st Place: ₹5,000</p>
-                <p>🥈 2nd Place: ₹3,000</p>
-                <p>🥉 3rd Place: ₹1,500</p>
-                <p>💀 MVP: ₹500</p>
-            </div>
-        </div>
+    <!-- Your Website Content -->
+    <div style="color: white; padding: 50px;">
+        <h1>Website Content Here</h1>
     </div>
 
 </body>
