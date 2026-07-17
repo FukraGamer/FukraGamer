@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FukraGamer | BGMI Esports</title>
     
-    <!-- Heavy Bold Font for Logo & Normal Font for Site -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
         /* Stake.com Premium Colors */
         :root {
-            --bg-main: #0f212e; /* Deep Dark Blue */
+            --bg-main: #0f212e;
             --bg-sidebar: #1a2c38;
             --bg-card: #213743;
             --text-main: #ffffff;
@@ -49,7 +49,7 @@
 
         .brand {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(24px, 4vw, 32px); /* Size Chota te Auto-Adjust kita */
+            font-size: clamp(24px, 4vw, 32px);
             font-weight: 900;
             color: var(--text-main);
             letter-spacing: -1px;
@@ -58,7 +58,6 @@
             animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
         }
 
-        /* 3 Stars (Sparkles) */
         .star {
             position: absolute;
             color: var(--text-main);
@@ -70,28 +69,23 @@
         .star-2 { top: -8px; right: -15px; animation-delay: 0.8s; }
         .star-3 { bottom: -8px; left: -15px; animation-delay: 1s; }
 
-        @keyframes popIn {
-            to { opacity: 1; transform: scale(1); }
-        }
+        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
         @keyframes sparklePop {
             0% { opacity: 0; transform: scale(0); }
             50% { opacity: 1; transform: scale(1.2); }
             100% { opacity: 0.8; transform: scale(1); }
         }
-        @keyframes fadeOutScreen {
-            to { opacity: 0; visibility: hidden; }
-        }
+        @keyframes fadeOutScreen { to { opacity: 0; visibility: hidden; } }
 
-        /* --- 2. MAIN WEBSITE LAYOUT (PC & MOBILE AUTO-ADJUST) --- */
+        /* --- 2. MAIN WEBSITE LAYOUT --- */
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             display: flex;
-            height: 100vh; /* Full height for PC */
-            overflow: hidden; /* Main scroll hide karan layi */
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* Sidebar Styling */
         .sidebar {
             width: 260px;
             background-color: var(--bg-sidebar);
@@ -139,12 +133,11 @@
             color: var(--text-main);
         }
 
-        /* Main Content Area */
         .main-content {
             flex: 1;
             padding: 40px;
             height: 100vh;
-            overflow-y: auto; /* Sirf right side scroll hovegi PC te */
+            overflow-y: auto;
         }
 
         .header {
@@ -163,6 +156,7 @@
             font-weight: bold;
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+            display: inline-block;
         }
 
         .btn-register:hover {
@@ -170,31 +164,119 @@
             transform: translateY(-2px);
         }
 
-        /* Banner */
+        /* --- 3. NAVA ANIMATED BANNER (BGMI THEME) --- */
         .banner {
             background: linear-gradient(135deg, #213743, #0f212e);
-            padding: 50px 30px;
+            padding: 40px 50px;
             border-radius: 12px;
-            text-align: center;
             margin-bottom: 40px;
             border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between; /* Text left, Animation right */
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .banner h1 {
-            font-size: clamp(28px, 5vw, 40px); /* Mobile te apne aap chota hovega */
+        .banner-text {
+            text-align: left;
+            z-index: 2;
+        }
+
+        /* Top Tagline (INSTANT PLAY di jagah) */
+        .top-tagline {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: clamp(16px, 3vw, 22px);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Main Title (FOOTBALL FEVER di jagah) */
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(28px, 5vw, 45px);
+            font-weight: 900;
+            font-style: italic;
+            /* Stake wangu green te white gradient text */
+            background: linear-gradient(90deg, #ffffff, var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
         }
 
-        .banner p {
+        .banner-text p {
             color: var(--text-muted);
             font-size: 18px;
             margin-bottom: 25px;
+            font-weight: 600;
         }
 
-        /* Cards Grid */
+        /* --- BGMI AIRDROP & FLARE ANIMATION --- */
+        .banner-animation {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            /* Airdrop float animation */
+            animation: floatAirdrop 3s ease-in-out infinite;
+        }
+
+        /* Lal Airdrop Dabba */
+        .airdrop-box {
+            width: 80px;
+            height: 80px;
+            background-color: #e74c3c; /* Red */
+            border-radius: 6px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Airdrop de upar neeli (blue) patti */
+        .airdrop-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 30px;
+            width: 20px; height: 100%;
+            background-color: #3498db; /* Blue */
+        }
+
+        /* Airdrop di yellow flare (Dhuan) */
+        .flare-smoke {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 60px;
+            background: rgba(255, 235, 59, 0.8); /* Yellow glow */
+            filter: blur(8px);
+            border-radius: 50%;
+            /* Dhuan nikaln di animation */
+            animation: smokeRise 1.5s infinite ease-out;
+        }
+
+        /* Animations */
+        @keyframes floatAirdrop {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes smokeRise {
+            0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.9; }
+            100% { transform: translateX(-50%) translateY(-50px) scale(2.5); opacity: 0; }
+        }
+
+        /* --- 4. Cards Grid --- */
         .grid-container {
             display: grid;
-            /* Auto-adjust grid: Screen choti hon te 1 line ch aa jange */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
@@ -224,51 +306,24 @@
             margin-bottom: 8px;
         }
 
-        /* --- 3. MOBILE RESPONSIVE FIXES (Phone te professional look) --- */
+        /* --- Mobile Responsive Fixes --- */
         @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-                height: auto;
-                overflow: auto; /* Mobile te normal scroll */
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .sidebar-header {
-                padding: 20px;
-            }
-
-            .menu {
-                flex-direction: row; /* Mobile te sidha menu */
-                overflow-x: auto; /* Swipe karan wala menu */
-                padding: 0 15px 15px 15px;
-                white-space: nowrap;
-            }
-
-            .menu::-webkit-scrollbar {
-                display: none; /* Scrollbar hide karan layi */
-            }
-
-            .main-content {
-                height: auto;
-                padding: 20px;
-                overflow-y: visible;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-
+            body { flex-direction: column; height: auto; overflow: auto; }
+            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .sidebar-header { padding: 20px; }
+            .menu { flex-direction: row; overflow-x: auto; padding: 0 15px 15px 15px; white-space: nowrap; }
+            .menu::-webkit-scrollbar { display: none; }
+            .main-content { height: auto; padding: 20px; overflow-y: visible; }
+            .header { flex-direction: column; gap: 20px; text-align: center; }
+            
+            /* Banner Mobile View */
             .banner {
-                padding: 30px 15px;
+                flex-direction: column-reverse; /* Mobile te Airdrop upar, text thalle */
+                text-align: center;
+                padding: 40px 20px;
+                gap: 30px;
             }
+            .banner-text { text-align: center; }
         }
     </style>
 </head>
@@ -280,7 +335,6 @@
             <span class="star star-1">✦</span>
             <span class="star star-2">✦</span>
             <span class="star star-3">✦</span>
-            <!-- Dot Hata Dita te Size chota kar dita -->
             <div class="brand">FukraGamer</div>
         </div>
     </div>
@@ -304,14 +358,23 @@
         
         <div class="header">
             <h2>Welcome to the Arena</h2>
-            <!-- Google form link ethe pao -->
             <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Register Team</a>
         </div>
 
+        <!-- ANIMATED BANNER -->
         <div class="banner">
-            <h1>BGMI Showdown 2026</h1>
-            <p>Prize Pool: ₹10,000 | Entry Fee: ₹100 per Squad</p>
-            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Join Now</a>
+            <div class="banner-text">
+                <div class="top-tagline">Drop In! Loot Up! Survive!</div>
+                <h1 class="main-title">BGMI Showdown 2026</h1>
+                <p>Prize Pool: ₹10,000 | Entry Fee: ₹100 per Squad</p>
+                <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Join Now</a>
+            </div>
+            
+            <!-- BGMI Airdrop Animation -->
+            <div class="banner-animation">
+                <div class="flare-smoke"></div>
+                <div class="airdrop-box"></div>
+            </div>
         </div>
 
         <div class="grid-container">
