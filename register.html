@@ -28,85 +28,36 @@
         .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.1s; }
         @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        /* --- HEADER & NEW 3D LOGO --- */
+        /* --- HEADER --- */
         header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10000; border-bottom: 1px solid #2a3d4a; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        
-        .header-logo { 
-            height: 40px; 
-            width: 40px; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            border: 2px solid var(--accent-yellow); 
-            box-shadow: 0 0 10px rgba(253,218,16,0.4); 
-            opacity: 0; 
-            animation: slamDrop 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-        
-        @keyframes slamDrop {
-            0% { transform: translateY(-150px); opacity: 0; }
-            60% { transform: translateY(0); opacity: 1; }
-            70% { transform: translateY(-12px) rotate(-10deg); }
-            80% { transform: translateY(0) rotate(10deg); }
-            90% { transform: translateY(-4px) rotate(-5deg); }
-            100% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        }
-
+        .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent-yellow); box-shadow: 0 0 10px rgba(253,218,16,0.4); }
         .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -0.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .back-btn { background: none; border: none; color: var(--text-main); font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.2s; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .back-btn:active { transform: scale(0.95); }
-
-        /* --- MAIN LAYOUT & PADDING --- */
+        
         .container { padding: 15px; max-width: 800px; margin: 0 auto; margin-top: 20px; }
 
-        /* --- CUSTOM REGISTRATION FORM (3D DARK THEME) --- */
-        .register-section { 
-            background-color: var(--bg-card); border-radius: 8px; padding: 25px; margin-bottom: 30px; 
-            border: 1px solid #2a3d4a; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6); /* 3D Box Shadow */
-        }
+        .register-section { background-color: var(--bg-card); border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #2a3d4a; box-shadow: 0 8px 25px rgba(0,0,0,0.6); }
         .register-section h2 { color: #fff; margin-bottom: 5px; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .register-section .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
         
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
-        
-        .form-control { 
-            width: 100%; padding: 12px 15px; background-color: #0a141d; 
-            border: 1px solid #2a3d4a; border-radius: 6px; color: #fff; font-size: 15px; transition: 0.3s; 
-            font-family: 'Roboto', sans-serif; 
-            box-shadow: inset 0 3px 6px rgba(0,0,0,0.6); /* 3D Inset Shadow for inputs */
-        }
-        .form-control:focus { border-color: var(--accent-blue); outline: none; box-shadow: inset 0 3px 6px rgba(0,0,0,0.6), 0 0 8px rgba(20, 117, 225, 0.4); }
-        select.form-control { appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%23b1bad3" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat: no-repeat; background-position: right 10px center; }
+        .form-control { width: 100%; padding: 12px 15px; background-color: #0a141d; border: 1px solid #2a3d4a; border-radius: 6px; color: #fff; font-size: 15px; transition: 0.3s; font-family: 'Roboto', sans-serif; box-shadow: inset 0 3px 6px rgba(0,0,0,0.6); }
+        .form-control:focus { border-color: var(--accent-blue); outline: none; }
         
         .qr-box { background-color: #0a141d; padding: 20px; text-align: center; border-radius: 8px; border: 1px dashed var(--accent-green); margin: 25px 0; box-shadow: inset 0 4px 10px rgba(0,0,0,0.6); }
         .qr-box img { max-width: 160px; margin: 10px 0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .qr-text { color: var(--accent-green); font-weight: bold; font-size: 16px; margin-bottom: 5px; text-shadow: 0 1px 3px rgba(0,231,1,0.3); }
-        .qr-subtext { font-size: 13px; color: var(--text-muted); }
-
-        .discord-notice { background-color: rgba(20, 117, 225, 0.1); border-left: 4px solid var(--accent-blue); padding: 12px 15px; margin-bottom: 20px; font-size: 14px; border-radius: 0 6px 6px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-
-        /* REALISTIC 3D BUTTON */
-        .btn-primary-large { 
-            display: block; width: 100%; background-color: var(--accent-blue); color: #fff; 
-            text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; 
-            font-size: 16px; margin-bottom: 10px; border: none; cursor: pointer; 
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
-        }
-        .btn-primary-large:active { 
-            transform: translateY(4px) !important; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important; 
-        }
-
+        
+        .discord-notice { background-color: rgba(20, 117, 225, 0.1); border-left: 4px solid var(--accent-blue); padding: 12px 15px; margin-bottom: 20px; font-size: 14px; border-radius: 0 6px 6px 0; }
+        .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); }
+        .btn-primary-large:active { transform: translateY(4px); }
         footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
-        .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
     </style>
 </head>
 <body>
 
-    <!-- HEADER with Back Button & 3D Slam Logo -->
     <header>
         <a href="index.html" class="brand-link">
             <img src="logo.png" alt="Logo" class="header-logo">
@@ -115,83 +66,99 @@
         <a href="index.html" class="back-btn">&larr; Back Home</a>
     </header>
 
-    <!-- MAIN CONTENT -->
     <div class="container fade-in-up">
-        
-        <!-- CUSTOM REGISTRATION FORM SECTION -->
         <div class="register-section">
             <h2>Register Your Squad</h2>
-            <p class="subtitle">Fill out the details below. Our platform is 100% secure. Room details will be sent to the Team Leader.</p>
+            <p class="subtitle">Fill out the details below. Our platform is 100% secure.</p>
 
-            <!-- IMPORTANT: Change the action link to your Formspree link later to get emails -->
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                
+            <form id="registrationForm">
                 <div class="form-group">
                     <label>Select Tournament</label>
                     <select name="Tournament" class="form-control" required>
-                        <option value="" disabled selected>Select Match Type</option>
                         <option value="Classic Mega Match">Classic Mega Match (Entry: 100 INR)</option>
                         <option value="Daily TDM Clash">Daily TDM Clash 4v4 (Entry: 100 INR)</option>
-                        <option value="Daily TDM Clash">Free Fire Max Classic (Entry: 100 INR)</option>
-                        <option value="Daily TDM Clash">Call Of Duty Mobile (Entry: 100 INR)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Team Name</label>
-                    <input type="text" name="Team Name" class="form-control" placeholder="Enter your Squad Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Team Leader WhatsApp Number</label>
-                    <input type="tel" name="WhatsApp Number" class="form-control" placeholder="For Room ID & Password" required>
+                    <input type="text" id="teamName" name="Team Name" class="form-control" placeholder="Enter your Squad Name" required>
                 </div>
 
                 <div class="form-group">
                     <label>Player 1 (Leader) - IGN & Character ID</label>
-                    <input type="text" name="Player 1" class="form-control" placeholder="E.g. FukraX (5123456789)" required>
+                    <input type="text" id="player1" name="Player 1" class="form-control" placeholder="E.g. FukraX (5123456789)" required>
                 </div>
 
                 <div class="form-group">
                     <label>Player 2 - IGN & Character ID</label>
-                    <input type="text" name="Player 2" class="form-control" placeholder="E.g. FukraY (5987654321)" required>
+                    <input type="text" id="player2" name="Player 2" class="form-control" placeholder="E.g. FukraY (5987654321)" required>
                 </div>
 
                 <div class="form-group">
                     <label>Player 3 - IGN & Character ID</label>
-                    <input type="text" name="Player 3" class="form-control" placeholder="Enter Details" required>
+                    <input type="text" id="player3" name="Player 3" class="form-control" placeholder="Enter Details" required>
                 </div>
 
                 <div class="form-group">
                     <label>Player 4 - IGN & Character ID</label>
-                    <input type="text" name="Player 4" class="form-control" placeholder="Enter Details" required>
+                    <input type="text" id="player4" name="Player 4" class="form-control" placeholder="Enter Details" required>
                 </div>
 
-                <!-- QR CODE PAYMENT BOX -->
                 <div class="qr-box">
                     <div class="qr-text">Scan & Pay Entry Fee (100 INR)</div>
-                    <div class="qr-subtext">Google Pay / PhonePe / Paytm</div>
-                    <!-- Upload QR photo as qr.png in Github -->
                     <img src="qr.png" alt="Payment QR Code">
-                    <div class="qr-subtext">Take a screenshot after payment</div>
                 </div>
 
-                <!-- DISCORD INSTRUCTION -->
                 <div class="discord-notice">
-                    <strong>Important Step:</strong> Click "Submit Registration" below. Then, go to our Discord Server and open a Ticket to send your Payment Screenshot. Your slot will be confirmed only after verification.
+                    <strong>Important Step:</strong> Click "Submit Registration" below. Then, join our Discord and send your Payment Screenshot in the Ticket channel.
                 </div>
 
                 <button type="submit" class="btn-primary-large">Submit Registration</button>
             </form>
         </div>
 
-        <!-- Footer -->
         <footer>
-            <div class="footer-logo">FukraGamer</div>
             <p>2026 FukraGamer Esports | All Rights Reserved.</p>
         </footer>
-
     </div>
 
+    <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+
+        const teamName = document.getElementById('teamName').value;
+        const player1 = document.getElementById('player1').value;
+        const player2 = document.getElementById('player2').value;
+        const player3 = document.getElementById('player3').value;
+        const player4 = document.getElementById('player4').value;
+
+        // Tuhade provided Webhook URL
+        const webhookURL = "https://discord.com/api/webhooks/1527673758494494871/ZNCbZOemk3FDrrZCWFfjMrtJGWufCdd9vPDIZ_DdcJudF8Zk5D_V28YRutPCqmdoZhkv"; 
+
+        const message = {
+            content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for screenshot in #verify-payment ticket.*`
+        };
+
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.innerText = "Redirecting to Discord...";
+        submitBtn.disabled = true;
+
+        fetch(webhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(message)
+        })
+        .then(response => {
+            // Tuhada provided Discord Invite Link
+            window.location.href = "https://discord.gg/uvYfD4smh5"; 
+        })
+        .catch(error => {
+            alert("Error submitting. Please try again.");
+            submitBtn.innerText = "Submit Registration";
+            submitBtn.disabled = false;
+        });
+    });
+    </script>
 </body>
 </html>
