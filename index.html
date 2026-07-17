@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* Stake.com Premium Colors */
+        /* Premium Colors */
         :root {
             --bg-main: #0f212e;
             --bg-sidebar: #1a2c38;
@@ -37,7 +37,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999;
             animation: fadeOutScreen 0.5s ease-in-out 2.5s forwards;
         }
 
@@ -77,15 +77,89 @@
         }
         @keyframes fadeOutScreen { to { opacity: 0; visibility: hidden; } }
 
-        /* --- 2. MAIN WEBSITE LAYOUT --- */
+        /* --- NEW LAYOUT: TOP BAR + MAIN APP AREA --- */
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             display: flex;
+            flex-direction: column; /* Upar Banner, Thalle Website */
             height: 100vh;
             overflow: hidden;
         }
 
+        /* --- 2. TOP ANNOUNCEMENT BANNER (UNIPIN STYLE) --- */
+        .top-banner {
+            width: 100%;
+            height: 55px; /* Patli strip UniPin wangu */
+            background: linear-gradient(90deg, #102535, #1a2c38);
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+            justify-content: center;
+        }
+
+        .banner-text-1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: clamp(12px, 2.5vw, 16px);
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .banner-text-2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            font-size: clamp(14px, 3vw, 20px);
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(0, 231, 1, 0.3);
+        }
+
+        /* BGMI Character Animation */
+        .character-container {
+            position: relative;
+            height: 100%;
+            width: 60px;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .bgmi-char {
+            height: 85px; /* Banner ton thoda vadda ta jo 3D pop out lagge */
+            position: absolute;
+            bottom: -5px; /* Thaleo thoda bahar */
+            animation: characterBob 1.5s infinite alternate ease-in-out;
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5));
+        }
+
+        @keyframes characterBob {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-6px) scale(1.05); }
+        }
+
+        /* --- 3. MAIN APP CONTAINER (Sidebar + Content) --- */
+        .app-container {
+            display: flex;
+            flex: 1; /* Bachi hoyi height cover karega */
+            overflow: hidden;
+        }
+
+        /* Sidebar */
         .sidebar {
             width: 260px;
             background-color: var(--bg-sidebar);
@@ -93,7 +167,6 @@
             flex-direction: column;
             border-right: 1px solid var(--border-color);
             flex-shrink: 0;
-            height: 100vh;
             overflow-y: auto;
         }
 
@@ -133,10 +206,10 @@
             color: var(--text-main);
         }
 
+        /* Main Content */
         .main-content {
             flex: 1;
             padding: 40px;
-            height: 100vh;
             overflow-y: auto;
         }
 
@@ -145,6 +218,11 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            font-weight: 700;
         }
 
         .btn-register {
@@ -156,7 +234,6 @@
             font-weight: bold;
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
-            display: inline-block;
         }
 
         .btn-register:hover {
@@ -164,117 +241,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- 3. NAVA ANIMATED BANNER (BGMI THEME) --- */
-        .banner {
-            background: linear-gradient(135deg, #213743, #0f212e);
-            padding: 40px 50px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between; /* Text left, Animation right */
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner-text {
-            text-align: left;
-            z-index: 2;
-        }
-
-        /* Top Tagline (INSTANT PLAY di jagah) */
-        .top-tagline {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-main);
-            font-weight: 800;
-            font-size: clamp(16px, 3vw, 22px);
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        /* Main Title (FOOTBALL FEVER di jagah) */
-        .main-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(28px, 5vw, 45px);
-            font-weight: 900;
-            font-style: italic;
-            /* Stake wangu green te white gradient text */
-            background: linear-gradient(90deg, #ffffff, var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .banner-text p {
-            color: var(--text-muted);
-            font-size: 18px;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        /* --- BGMI AIRDROP & FLARE ANIMATION --- */
-        .banner-animation {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-            /* Airdrop float animation */
-            animation: floatAirdrop 3s ease-in-out infinite;
-        }
-
-        /* Lal Airdrop Dabba */
-        .airdrop-box {
-            width: 80px;
-            height: 80px;
-            background-color: #e74c3c; /* Red */
-            border-radius: 6px;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
-        }
-
-        /* Airdrop de upar neeli (blue) patti */
-        .airdrop-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 30px;
-            width: 20px; height: 100%;
-            background-color: #3498db; /* Blue */
-        }
-
-        /* Airdrop di yellow flare (Dhuan) */
-        .flare-smoke {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 15px;
-            height: 60px;
-            background: rgba(255, 235, 59, 0.8); /* Yellow glow */
-            filter: blur(8px);
-            border-radius: 50%;
-            /* Dhuan nikaln di animation */
-            animation: smokeRise 1.5s infinite ease-out;
-        }
-
-        /* Animations */
-        @keyframes floatAirdrop {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        @keyframes smokeRise {
-            0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.9; }
-            100% { transform: translateX(-50%) translateY(-50px) scale(2.5); opacity: 0; }
-        }
-
-        /* --- 4. Cards Grid --- */
+        /* Cards Grid */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -306,24 +273,21 @@
             margin-bottom: 8px;
         }
 
-        /* --- Mobile Responsive Fixes --- */
+        /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 768px) {
-            body { flex-direction: column; height: auto; overflow: auto; }
+            body { height: auto; overflow: visible; }
+            .top-banner { padding: 5px; height: 60px; }
+            .banner-content { gap: 8px; }
+            .bgmi-char { height: 75px; } /* Mobile te char thoda chota */
+            
+            .app-container { flex-direction: column; overflow: visible; }
             .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
             .sidebar-header { padding: 20px; }
             .menu { flex-direction: row; overflow-x: auto; padding: 0 15px 15px 15px; white-space: nowrap; }
             .menu::-webkit-scrollbar { display: none; }
-            .main-content { height: auto; padding: 20px; overflow-y: visible; }
-            .header { flex-direction: column; gap: 20px; text-align: center; }
             
-            /* Banner Mobile View */
-            .banner {
-                flex-direction: column-reverse; /* Mobile te Airdrop upar, text thalle */
-                text-align: center;
-                padding: 40px 20px;
-                gap: 30px;
-            }
-            .banner-text { text-align: center; }
+            .main-content { padding: 20px; overflow-y: visible; }
+            .header { flex-direction: column; gap: 20px; text-align: center; }
         }
     </style>
 </head>
@@ -339,68 +303,69 @@
         </div>
     </div>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <a href="#" class="logo">FukraGamer</a>
-        </div>
-        <div class="menu">
-            <a href="#" class="menu-item active">🏠 Home</a>
-            <a href="#" class="menu-item">🏆 Tournaments</a>
-            <a href="#" class="menu-item">📊 Leaderboard</a>
-            <a href="#" class="menu-item">📜 Rules</a>
-            <a href="#" class="menu-item">💬 Support</a>
+    <!-- NEW TOP BANNER (UNIPIN STYLE) -->
+    <div class="top-banner">
+        <div class="banner-content">
+            <div class="banner-text-1">DROP IN! LOOT UP!</div>
+            <div class="banner-text-2">BGMI SHOWDOWN 2026</div>
+            <div class="character-container">
+                <!-- BGMI Character Image (Transparent PNG) -->
+                <img src="https://www.pngall.com/wp-content/uploads/13/PUBG-Character-PNG-File.png" alt="BGMI Character" class="bgmi-char">
+            </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
+    <!-- MAIN APP WRAPPER -->
+    <div class="app-container">
         
-        <div class="header">
-            <h2>Welcome to the Arena</h2>
-            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Register Team</a>
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">FukraGamer</a>
+            </div>
+            <div class="menu">
+                <a href="#" class="menu-item active">🏠 Home</a>
+                <a href="#" class="menu-item">🏆 Tournaments</a>
+                <a href="#" class="menu-item">📊 Leaderboard</a>
+                <a href="#" class="menu-item">📜 Rules</a>
+                <a href="#" class="menu-item">💬 Support</a>
+            </div>
         </div>
 
-        <!-- ANIMATED BANNER -->
-        <div class="banner">
-            <div class="banner-text">
-                <div class="top-tagline">Drop In! Loot Up! Survive!</div>
-                <h1 class="main-title">BGMI Showdown 2026</h1>
-                <p>Prize Pool: ₹10,000 | Entry Fee: ₹100 per Squad</p>
-                <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Join Now</a>
-            </div>
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
             
-            <!-- BGMI Airdrop Animation -->
-            <div class="banner-animation">
-                <div class="flare-smoke"></div>
-                <div class="airdrop-box"></div>
+            <div class="header">
+                <h2>Welcome to the Arena</h2>
+                <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Register Team</a>
             </div>
+
+            <!-- CARDS SECTION -->
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Match Schedule</h3>
+                    <p><strong>Qualifiers:</strong> 20 July, 8:00 PM</p>
+                    <p><strong>Semi-Finals:</strong> 22 July, 9:00 PM</p>
+                    <p><strong>Grand Finals:</strong> 25 July, 10:00 PM</p>
+                </div>
+
+                <div class="card">
+                    <h3>Tournament Rules</h3>
+                    <p>- Mobile players only (No Emulators).</p>
+                    <p>- Room details shared on WhatsApp 15 mins before match.</p>
+                    <p>- 1 Point per Kill, 15 Points for Chicken Dinner.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Prize Distribution</h3>
+                    <p>🥇 1st Place: ₹5,000</p>
+                    <p>🥈 2nd Place: ₹3,000</p>
+                    <p>🥉 3rd Place: ₹1,500</p>
+                    <p>💀 MVP: ₹500</p>
+                </div>
+            </div>
+
         </div>
-
-        <div class="grid-container">
-            <div class="card">
-                <h3>Match Schedule</h3>
-                <p><strong>Qualifiers:</strong> 20 July, 8:00 PM</p>
-                <p><strong>Semi-Finals:</strong> 22 July, 9:00 PM</p>
-                <p><strong>Grand Finals:</strong> 25 July, 10:00 PM</p>
-            </div>
-
-            <div class="card">
-                <h3>Tournament Rules</h3>
-                <p>- Mobile players only (No Emulators).</p>
-                <p>- Room details shared on WhatsApp 15 mins before match.</p>
-                <p>- 1 Point per Kill, 15 Points for Chicken Dinner.</p>
-            </div>
-
-            <div class="card">
-                <h3>Prize Distribution</h3>
-                <p>🥇 1st Place: ₹5,000</p>
-                <p>🥈 2nd Place: ₹3,000</p>
-                <p>🥉 3rd Place: ₹1,500</p>
-                <p>💀 MVP: ₹500</p>
-            </div>
-        </div>
-
     </div>
 
 </body>
