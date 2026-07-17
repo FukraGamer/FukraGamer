@@ -49,20 +49,30 @@
         .delay-4 { animation-delay: 2.9s; }
         .delay-5 { animation-delay: 3.0s; }
 
-        /* --- HEADER, LOGO ANIMATION & MENU --- */
+        /* --- HEADER, NEW LOGO ANIMATION & MENU --- */
         header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         
-        /* 3D Logo Floating Animation */
+        /* 🔥 NEW LOGO STYLE & SLAM-DROP ANIMATION 🔥 */
         .header-logo { 
-            height: 35px; width: auto; object-fit: contain; border-radius: 4px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); /* 3D Shadow for transparent PNG */
-            animation: floatLogo 3s ease-in-out infinite; /* Continuous Floating Effect */
+            height: 40px; 
+            width: 40px; 
+            object-fit: cover; /* Fit inside the circle perfectly */
+            border-radius: 50%; /* Makes the square logo circular */
+            border: 2px solid var(--accent-yellow); /* Premium Golden Ring */
+            box-shadow: 0 0 10px rgba(253,218,16,0.4); /* Glow matching the theme */
+            opacity: 0; /* Hidden before load */
+            animation: slamDrop 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 2.6s; /* Drops exactly when page text loads */
         }
-        @keyframes floatLogo {
-            0% { transform: translateY(0px); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
-            50% { transform: translateY(-4px); filter: drop-shadow(0 8px 10px rgba(0,0,0,0.4)); }
-            100% { transform: translateY(0px); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
+        
+        @keyframes slamDrop {
+            0% { transform: translateY(-150px); opacity: 0; }
+            60% { transform: translateY(0); opacity: 1; }
+            70% { transform: translateY(-12px) rotate(-10deg); }
+            80% { transform: translateY(0) rotate(10deg); }
+            90% { transform: translateY(-4px) rotate(-5deg); }
+            100% { transform: translateY(0) rotate(0deg); opacity: 1; }
         }
 
         .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -0.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
@@ -91,13 +101,11 @@
         /* --- REALISTIC 3D BUTTONS (Soft Shadows) --- */
         .btn-top, .btn-primary-large, .btn-play, .btn-yellow { 
             transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; display: inline-block; border: none; 
-            /* Real shadow look with inner shine */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
         }
         
         .btn-top:active, .btn-primary-large:active, .btn-play:active, .btn-yellow:active { 
             transform: translateY(4px) !important; 
-            /* Shadow reduces when pressed */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important; 
         }
 
@@ -164,7 +172,6 @@
 </head>
 <body id="top">
 
-    <!-- PRELOADER -->
     <div class="preloader">
         <div class="preloader-container">
             <span class="star star-1">✦</span>
@@ -174,10 +181,8 @@
         </div>
     </div>
 
-    <!-- HEADER WITH FLOATING LOGO -->
     <header>
         <a href="index.html" class="brand-link">
-            <!-- Logo with 3D Float Animation -->
             <img src="logo.png" alt="Logo" class="header-logo">
             <span class="logo-text">FukraGamer</span>
         </a>
@@ -188,7 +193,6 @@
         </div>
     </header>
 
-    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="menu-top-buttons">
             <a href="register.html" class="btn-top btn-dark">Register Team</a>
@@ -226,7 +230,6 @@
         </details>
     </div>
 
-    <!-- MAIN CONTENT WITH 3D ANIMATION DELAYS -->
     <div class="container main-content">
         
         <div class="top-action-buttons fade-in-up delay-1">
@@ -245,7 +248,6 @@
             <div class="promo-caption">FukraGamer - Top BGMI Tournaments in India</div>
         </div>
 
-        <!-- Active Tournaments Grid -->
         <h2 class="fade-in-up delay-4">Active Tournaments</h2>
         <div class="grid-2col fade-in-up delay-4">
             <div class="game-card">
@@ -264,7 +266,6 @@
             </div>
         </div>
 
-        <!-- Rules & Prize Details -->
         <h2 class="fade-in-up delay-5">Rules & Prize Distribution</h2>
         
         <details class="fade-in-up delay-5">
@@ -299,7 +300,6 @@
             </div>
         </details>
 
-        <!-- FAQ Accordions -->
         <h2 class="fade-in-up delay-5">Frequently Asked Questions</h2>
         <details class="fade-in-up delay-5">
             <summary>Are emulators allowed?</summary>
@@ -310,7 +310,6 @@
             <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number and on our Discord server exactly 15 minutes before the match starts.</p></div>
         </details>
 
-        <!-- Footer -->
         <footer class="fade-in-up delay-5">
             <div class="footer-logo">FukraGamer</div>
             <p>2026 FukraGamer Esports | All Rights Reserved.</p>
@@ -319,10 +318,8 @@
         </footer>
     </div>
 
-    <!-- Scroll to Top Button -->
     <a href="#top" class="scroll-top">^</a>
 
-    <!-- STICKY BOTTOM BAR -->
     <div class="sticky-bottom">
         <div class="sticky-text">
             <span class="sticky-title">BGMI SHOWDOWN</span>
@@ -331,7 +328,6 @@
         <a href="register.html" class="btn-yellow">Join Now</a>
     </div>
 
-    <!-- JAVASCRIPT -->
     <script>
         function toggleMenu() {
             document.querySelector('.menu-icon').classList.toggle('active');
