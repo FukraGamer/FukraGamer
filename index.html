@@ -192,6 +192,7 @@
         </details>
 
         <a href="#" class="mobile-menu-link">Leaderboard</a>
+        <a href="#refer-earn-section" class="mobile-menu-link" onclick="toggleMenu()">Refer & Earn</a> <!-- ADDED MENU LINK -->
 
         <details>
             <summary>Rules</summary>
@@ -223,6 +224,22 @@
             <img src="bgmi-tournament.png" alt="Esports Tournament">
             <div class="promo-caption">FukraGamer - Top BGMI, Free Fire Max & COD Mobile Tournaments in India</div>
         </div>
+
+        <!-- ADDED REFER & EARN SECTION -->
+        <h2 id="refer-earn-section" class="fade-in-up delay-4">💸 Refer & Earn</h2>
+        <div class="info-box fade-in-up delay-4" style="border-color: var(--accent-yellow); box-shadow: inset 0 4px 15px rgba(253, 218, 16, 0.1);">
+            <h3 style="color: var(--accent-yellow); margin-bottom: 10px; font-size: 18px;">Invite Friends, Earn Real Cash!</h3>
+            <p style="font-size: 14px; margin-bottom: 15px;">Share your unique link below. When your friend signs up and plays their first match, you get <strong>₹20</strong> and they get a <strong>₹10</strong> sign-up bonus!</p>
+            
+            <div style="background: #0f212e; padding: 10px 15px; border-radius: 6px; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border: 1px solid #2a3d4a;">
+                <input type="text" id="refLinkInput" value="https://fukragamer.com/?ref=FUKRA99" readonly style="flex: 1; background: transparent; border: none; color: #fff; font-size: 13px; outline: none; width: 100%;">
+                <button id="copyRefBtn" onclick="copyRefLink()" style="background: var(--accent-blue); color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; flex-shrink: 0; transition: 0.3s;">Copy</button>
+            </div>
+            
+            <div class="info-row"><span>Your Reward</span><span class="value" style="color: var(--accent-yellow);">₹20 per friend</span></div>
+            <div class="info-row"><span>Friend's Bonus</span><span class="value" style="color: var(--accent-yellow);">₹10 on sign up</span></div>
+        </div>
+        <!-- END REFER & EARN SECTION -->
 
         <h2 class="fade-in-up delay-4">Active Tournaments</h2>
         <div class="grid-2col fade-in-up delay-4">
@@ -414,7 +431,6 @@
         // Close Modal function
         function closeModal() {
             document.getElementById('welcomeModal').classList.remove('active');
-            // Check if mobile menu is also open before restoring scroll
             if (!document.getElementById('mobileMenu').classList.contains('active')) {
                 document.body.classList.remove('no-scroll');
             }
@@ -426,6 +442,46 @@
             document.getElementById('mobileMenu').classList.toggle('active');
             document.getElementById('menuOverlay').classList.toggle('active');
             document.body.classList.toggle('no-scroll');
+        }
+
+        // --- NEW: REFERRAL TRACKING SCRIPT ---
+        
+        // 1. Generate Fake Referral link for UI (In real site, backend provides this based on logged-in user)
+        const myReferralCode = "FUKRA" + Math.floor(1000 + Math.random() * 9000); 
+        document.getElementById("refLinkInput").value = "https://fukragamer.com/?ref=" + myReferralCode;
+
+        // 2. Track incoming clicks (Read URL for ?ref=CODE)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const incomingRefCode = urlParams.get('ref');
+            
+            if (incomingRefCode) {
+                // Save it to Local Storage so the sign-up page can use it later
+                localStorage.setItem('referredBy', incomingRefCode);
+                console.log("Tracking referral code: " + incomingRefCode);
+                
+                // Optional: Show a simple alert to the new user
+                // alert("Referral applied! Sign up now to get your ₹10 Bonus.");
+            }
+        };
+
+        // 3. Copy Button Logic
+        function copyRefLink() {
+            var copyText = document.getElementById("refLinkInput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            navigator.clipboard.writeText(copyText.value);
+            
+            // Visual feedback (Button turns green)
+            const btn = document.getElementById("copyRefBtn");
+            const originalText = btn.innerText;
+            btn.innerText = "Copied!";
+            btn.style.backgroundColor = "var(--accent-green)";
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "var(--accent-blue)";
+            }, 2000);
         }
     </script>
 </body>
