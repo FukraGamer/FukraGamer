@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FukraGamer | BGMI Esports</title>
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* Premium Colors */
         :root {
             --bg-main: #0f212e;
             --bg-sidebar: #1a2c38;
@@ -28,7 +26,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* --- 1. PRELOADER (STAKE STYLE DITTO) --- */
+        /* --- PRELOADER --- */
         .preloader {
             position: fixed;
             top: 0; left: 0;
@@ -41,11 +39,7 @@
             animation: fadeOutScreen 0.5s ease-in-out 2.5s forwards;
         }
 
-        .preloader-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+        .preloader-container { position: relative; display: flex; align-items: center; }
 
         .brand {
             font-family: 'Poppins', sans-serif;
@@ -77,20 +71,19 @@
         }
         @keyframes fadeOutScreen { to { opacity: 0; visibility: hidden; } }
 
-        /* --- NEW LAYOUT: TOP BAR + MAIN APP AREA --- */
+        /* --- TOP BANNER (WITH CHARACTER GLOW) --- */
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             display: flex;
-            flex-direction: column; /* Upar Banner, Thalle Website */
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* --- 2. TOP ANNOUNCEMENT BANNER (UNIPIN STYLE) --- */
         .top-banner {
             width: 100%;
-            height: 55px; /* Patli strip UniPin wangu */
+            height: 55px;
             background: linear-gradient(90deg, #102535, #1a2c38);
             border-bottom: 2px solid var(--border-color);
             display: flex;
@@ -129,163 +122,63 @@
             text-shadow: 0 0 10px rgba(0, 231, 1, 0.3);
         }
 
-        /* BGMI Character Animation */
+        /* Navin Character Animation te Glow */
         .character-container {
             position: relative;
             height: 100%;
-            width: 60px;
+            width: 65px;
             display: flex;
             align-items: center;
             margin-left: 10px;
         }
 
         .bgmi-char {
-            height: 85px; /* Banner ton thoda vadda ta jo 3D pop out lagge */
+            height: 95px; /* Photo da size vadda rakheya hai */
             position: absolute;
-            bottom: -5px; /* Thaleo thoda bahar */
+            bottom: -5px;
             animation: characterBob 1.5s infinite alternate ease-in-out;
-            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5));
+            /* Photo de piche neon green glow */
+            filter: drop-shadow(0px 8px 10px rgba(0, 231, 1, 0.4));
+            z-index: 1001;
         }
 
         @keyframes characterBob {
             0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(-6px) scale(1.05); }
+            100% { transform: translateY(-8px) scale(1.05); }
         }
 
-        /* --- 3. MAIN APP CONTAINER (Sidebar + Content) --- */
-        .app-container {
-            display: flex;
-            flex: 1; /* Bachi hoyi height cover karega */
-            overflow: hidden;
-        }
+        /* --- MAIN APP CONTAINER --- */
+        .app-container { display: flex; flex: 1; overflow: hidden; }
 
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background-color: var(--bg-sidebar);
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid var(--border-color);
-            flex-shrink: 0;
-            overflow-y: auto;
-        }
+        .sidebar { width: 260px; background-color: var(--bg-sidebar); display: flex; flex-direction: column; border-right: 1px solid var(--border-color); flex-shrink: 0; overflow-y: auto; }
+        .sidebar-header { padding: 30px 20px; text-align: center; }
+        .logo { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: var(--text-main); letter-spacing: -1px; text-decoration: none; }
+        .menu { display: flex; flex-direction: column; padding: 0 15px; gap: 8px; }
+        .menu-item { color: var(--text-muted); text-decoration: none; padding: 14px 18px; border-radius: 8px; font-weight: 600; font-size: 15px; transition: all 0.3s ease; }
+        .menu-item:hover, .menu-item.active { background-color: var(--bg-card); color: var(--text-main); }
 
-        .sidebar-header {
-            padding: 30px 20px;
-            text-align: center;
-        }
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .header h2 { font-size: 28px; font-weight: 700; }
+        .btn-register { background-color: var(--accent-green); color: #000; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2); }
+        .btn-register:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
 
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--text-main);
-            letter-spacing: -1px;
-            text-decoration: none;
-        }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background-color: var(--bg-card); padding: 25px; border-radius: 10px; border: 1px solid var(--border-color); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); background-color: #2a4453; }
+        .card h3 { color: var(--text-main); margin-bottom: 15px; font-size: 20px; }
+        .card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; }
 
-        .menu {
-            display: flex;
-            flex-direction: column;
-            padding: 0 15px;
-            gap: 8px;
-        }
-
-        .menu-item {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 14px 18px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background-color: var(--bg-card);
-            color: var(--text-main);
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .header h2 {
-            font-size: 28px;
-            font-weight: 700;
-        }
-
-        .btn-register {
-            background-color: var(--accent-green);
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
-        }
-
-        .btn-register:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-
-        /* Cards Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            background-color: #2a4453;
-        }
-
-        .card h3 {
-            color: var(--text-main);
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-
-        /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 768px) {
             body { height: auto; overflow: visible; }
             .top-banner { padding: 5px; height: 60px; }
             .banner-content { gap: 8px; }
-            .bgmi-char { height: 75px; } /* Mobile te char thoda chota */
-            
+            .bgmi-char { height: 80px; }
             .app-container { flex-direction: column; overflow: visible; }
             .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
             .sidebar-header { padding: 20px; }
             .menu { flex-direction: row; overflow-x: auto; padding: 0 15px 15px 15px; white-space: nowrap; }
             .menu::-webkit-scrollbar { display: none; }
-            
             .main-content { padding: 20px; overflow-y: visible; }
             .header { flex-direction: column; gap: 20px; text-align: center; }
         }
@@ -303,22 +196,20 @@
         </div>
     </div>
 
-    <!-- NEW TOP BANNER (UNIPIN STYLE) -->
+    <!-- TOP BANNER -->
     <div class="top-banner">
         <div class="banner-content">
             <div class="banner-text-1">DROP IN! LOOT UP!</div>
             <div class="banner-text-2">BGMI SHOWDOWN 2026</div>
             <div class="character-container">
-                <!-- BGMI Character Image (Transparent PNG) -->
-                <img src="https://www.pngall.com/wp-content/uploads/13/PUBG-Character-PNG-File.png" alt="BGMI Character" class="bgmi-char">
+                <!-- Ethe dhyan dvo: src="hero.png" kar dita hai -->
+                <img src="hero.png" alt="BGMI Character" class="bgmi-char">
             </div>
         </div>
     </div>
 
-    <!-- MAIN APP WRAPPER -->
+    <!-- MAIN APP -->
     <div class="app-container">
-        
-        <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="logo">FukraGamer</a>
@@ -332,15 +223,12 @@
             </div>
         </div>
 
-        <!-- MAIN CONTENT -->
         <div class="main-content">
-            
             <div class="header">
                 <h2>Welcome to the Arena</h2>
                 <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-register">Register Team</a>
             </div>
 
-            <!-- CARDS SECTION -->
             <div class="grid-container">
                 <div class="card">
                     <h3>Match Schedule</h3>
@@ -348,14 +236,12 @@
                     <p><strong>Semi-Finals:</strong> 22 July, 9:00 PM</p>
                     <p><strong>Grand Finals:</strong> 25 July, 10:00 PM</p>
                 </div>
-
                 <div class="card">
                     <h3>Tournament Rules</h3>
                     <p>- Mobile players only (No Emulators).</p>
                     <p>- Room details shared on WhatsApp 15 mins before match.</p>
                     <p>- 1 Point per Kill, 15 Points for Chicken Dinner.</p>
                 </div>
-
                 <div class="card">
                     <h3>Prize Distribution</h3>
                     <p>🥇 1st Place: ₹5,000</p>
@@ -364,7 +250,6 @@
                     <p>💀 MVP: ₹500</p>
                 </div>
             </div>
-
         </div>
     </div>
 
