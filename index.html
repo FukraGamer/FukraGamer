@@ -13,6 +13,7 @@
             --bg-body: #0a141d;
             --bg-card: #1a2c38;
             --bg-header: #0f212e;
+            --bg-menu: #10212d; /* Stake menu dark color */
             --text-main: #ffffff;
             --text-muted: #b1bad3;
             --accent-blue: #1475e1;
@@ -21,66 +22,26 @@
             --accent-yellow: #fdda10;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
 
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            padding-bottom: 70px;
-        }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 70px; }
+        
+        /* Menu open hon te background scroll rokan layi */
+        body.no-scroll { overflow: hidden; } 
 
         /* --- PRELOADER --- */
-        .preloader {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-color: var(--bg-header);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            animation: fadeOutScreen 0.5s ease-in-out 2.5s forwards;
-        }
-
+        .preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--bg-header); display: flex; justify-content: center; align-items: center; z-index: 99999; animation: fadeOutScreen 0.5s ease-in-out 2.5s forwards; }
         .preloader-container { position: relative; display: flex; align-items: center; }
-
-        .brand-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(28px, 6vw, 42px);
-            font-weight: 900;
-            color: var(--text-main);
-            letter-spacing: -1px;
-            opacity: 0;
-            transform: scale(0.9);
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
-        }
-
-        .star {
-            position: absolute;
-            color: var(--text-main);
-            font-size: 16px;
-            opacity: 0;
-            animation: sparklePop 0.5s ease-out forwards;
-        }
+        .brand-logo { font-family: 'Poppins', sans-serif; font-size: clamp(28px, 6vw, 42px); font-weight: 900; color: var(--text-main); letter-spacing: -1px; opacity: 0; transform: scale(0.9); animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
+        .star { position: absolute; color: var(--text-main); font-size: 16px; opacity: 0; animation: sparklePop 0.5s ease-out forwards; }
         .star-1 { top: -20px; left: 5px; animation-delay: 0.6s; }
         .star-2 { top: -10px; right: -20px; animation-delay: 0.8s; }
         .star-3 { bottom: -10px; left: -20px; animation-delay: 1s; }
 
         @keyframes popIn { to { opacity: 1; transform: scale(1); } }
-        @keyframes sparklePop {
-            0% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0.8; transform: scale(1); }
-        }
+        @keyframes sparklePop { 0% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.8; transform: scale(1); } }
         @keyframes fadeOutScreen { to { opacity: 0; visibility: hidden; } }
 
         /* --- HEADER --- */
@@ -92,56 +53,77 @@
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 10000; /* Menu ton upar rakhna hai */
             border-bottom: 1px solid #2a3d4a;
         }
 
-        .logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+
+        /* Animated Hamburger Menu */
+        .menu-icon { width: 25px; height: 18px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+        .menu-icon span { width: 100%; height: 3px; background-color: #fff; border-radius: 2px; transition: 0.3s ease; }
+        
+        /* Jadon Menu Active hove (X banega) */
+        .menu-icon.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+        .menu-icon.active span:nth-child(2) { opacity: 0; }
+        .menu-icon.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+        /* --- STAKE STYLE MOBILE MENU --- */
+        .mobile-menu {
+            position: fixed;
+            top: 60px; /* Header ton thalle */
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 60px);
+            background-color: var(--bg-menu);
+            z-index: 9999;
+            transform: translateX(100%); /* Shuru ch screen ton bahar (sajje) */
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        .mobile-menu.active { transform: translateX(0); /* Menu andar aavega */ }
+
+        .menu-top-buttons { display: flex; gap: 10px; margin-bottom: 25px; }
+        
+        /* Mobile Menu Accordion Styles */
+        .mobile-menu-link {
+            display: block;
+            padding: 16px 5px;
             color: #fff;
             text-decoration: none;
-            letter-spacing: -0.5px;
+            font-weight: 500;
+            font-size: 16px;
+            border-bottom: 1px solid #2a3d4a;
         }
 
-        .menu-icon { width: 25px; height: 18px; display: flex; flex-direction: column; justify-content: space-between; }
-        .menu-icon span { width: 100%; height: 3px; background-color: #fff; border-radius: 2px; }
+        .mobile-menu details { background: none; margin: 0; border-radius: 0; border-bottom: 1px solid #2a3d4a; }
+        .mobile-menu summary { padding: 16px 5px; font-weight: 500; font-size: 16px; color: #fff; }
+        .mobile-menu summary::after { color: var(--accent-yellow); font-size: 20px; }
+        
+        .mobile-menu .sub-menu { padding: 0 0 15px 20px; }
+        .mobile-menu .sub-link { display: block; padding: 12px 0; color: var(--text-muted); text-decoration: none; font-size: 15px; }
+        .mobile-menu .sub-link:hover { color: #fff; }
 
         /* --- MAIN LAYOUT & PADDING --- */
-        .container {
-            padding: 15px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .container { padding: 15px; max-width: 800px; margin: 0 auto; }
 
         /* --- BUTTONS & ANIMATIONS --- */
-        .btn-top, .btn-primary-large, .btn-play, .btn-yellow, .scroll-top {
-            transition: all 0.2s ease;
-            cursor: pointer;
-            display: inline-block;
-        }
-        .btn-top:active, .btn-primary-large:active, .btn-play:active, .btn-yellow:active, .scroll-top:active {
-            transform: scale(0.95);
-        }
+        .btn-top, .btn-primary-large, .btn-play, .btn-yellow, .scroll-top { transition: all 0.2s ease; cursor: pointer; display: inline-block; }
+        .btn-top:active, .btn-primary-large:active, .btn-play:active, .btn-yellow:active, .scroll-top:active { transform: scale(0.95); }
 
         .top-action-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
         .btn-top { flex: 1; padding: 12px; border-radius: 6px; text-align: center; font-weight: 700; text-decoration: none; font-size: 15px; }
         .btn-dark { background-color: #213743; color: #fff; border: 1px solid #2a3d4a; }
-        .btn-dark:hover { background-color: #2a4453; }
         .btn-blue { background-color: var(--accent-blue); color: #fff; }
-        .btn-blue:hover { background-color: var(--accent-blue-hover); }
 
         h1 { font-size: 26px; font-weight: 700; line-height: 1.3; margin-bottom: 15px; }
         h2 { font-size: 22px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         p { color: var(--text-muted); line-height: 1.6; font-size: 15px; margin-bottom: 20px; }
 
-        .btn-primary-large {
-            display: block; width: 100%; background-color: var(--accent-blue); color: #fff;
-            text-align: center; padding: 14px; border-radius: 4px; font-weight: 700;
-            text-decoration: none; font-size: 16px; margin-bottom: 25px;
-        }
-        .btn-primary-large:hover { background-color: var(--accent-blue-hover); }
+        .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; margin-bottom: 25px; }
 
         /* --- IMAGES & BANNERS --- */
         .promo-banner { width: 100%; border-radius: 8px; margin-bottom: 25px; overflow: hidden; }
@@ -154,51 +136,32 @@
         .game-card img { width: 100%; height: 120px; object-fit: cover; }
         .game-card .content { padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .game-card h3 { font-size: 14px; margin-bottom: 10px; color: #fff; }
-        
         .game-card .btn-play { background-color: var(--accent-blue); color: #fff; padding: 8px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 14px; }
-        .game-card .btn-play:hover { background-color: var(--accent-blue-hover); }
 
-        /* --- ACCORDIONS & DATA TABLES --- */
-        details { background-color: var(--bg-card); border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
-        summary { padding: 16px; font-weight: 700; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '⌄'; font-size: 24px; color: var(--text-muted); }
-        details[open] summary::after { content: '⌃'; }
-        .details-content { padding: 0 16px 16px 16px; color: var(--text-muted); line-height: 1.6; }
+        /* --- MAIN ACCORDIONS & TABLES --- */
+        .main-content details { background-color: var(--bg-card); border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+        .main-content summary { padding: 16px; font-weight: 700; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        .main-content summary::-webkit-details-marker { display: none; }
+        .main-content summary::after { content: '⌄'; font-size: 24px; color: var(--text-muted); }
+        .main-content details[open] summary::after { content: '⌃'; }
+        .main-content .details-content { padding: 0 16px 16px 16px; color: var(--text-muted); line-height: 1.6; }
 
         .info-box { background-color: var(--bg-card); border-radius: 8px; padding: 20px; margin-bottom: 25px; }
         .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #2a3d4a; font-size: 15px; }
         .info-row:last-child { border-bottom: none; }
         .info-row .value { color: var(--accent-green); font-weight: 700; }
 
-        /* --- ADVANTAGES CARDS --- */
         .feature-card { background-color: var(--bg-card); border-radius: 8px; padding: 20px; text-align: left; }
         .feature-card h3 { color: var(--accent-yellow); font-size: 18px; margin-bottom: 10px; }
 
-        /* --- FLOATING UP BUTTON --- */
-        .scroll-top {
-            position: fixed; bottom: 85px; right: 15px; width: 45px; height: 45px;
-            background-color: var(--accent-green); color: #000; border-radius: 4px;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 24px; font-weight: bold; text-decoration: none; z-index: 999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        /* --- STICKY BOTTOM BAR --- */
-        .sticky-bottom {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background-color: #1a2c38; padding: 12px 15px;
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid #2a3d4a; z-index: 1000;
-        }
+        /* --- FLOATING BUTTONS --- */
+        .scroll-top { position: fixed; bottom: 85px; right: 15px; width: 45px; height: 45px; background-color: var(--accent-green); color: #000; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold; text-decoration: none; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .sticky-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #1a2c38; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2a3d4a; z-index: 1000; }
         .sticky-text { display: flex; flex-direction: column; }
         .sticky-title { font-weight: 700; font-size: 13px; text-transform: uppercase; }
         .sticky-sub { color: var(--accent-green); font-size: 12px; font-weight: 700; }
-
         .btn-yellow { background-color: var(--accent-yellow); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 14px; }
-        .btn-yellow:hover { background-color: #ebd000; }
 
-        /* Footer */
         footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
         .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; }
     </style>
@@ -218,37 +181,78 @@
     <!-- HEADER -->
     <header>
         <a href="#" class="logo-text">FukraGamer</a>
-        <div class="menu-icon">
+        <!-- Hamburger Menu Icon (JS naal connect) -->
+        <div class="menu-icon" onclick="toggleMenu()">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <div class="container">
+    <!-- EXPANDING MOBILE MENU (Stake Style) -->
+    <div class="mobile-menu" id="mobileMenu">
         
-        <!-- Top Action Buttons (Ethe discord da nava link pa dita hai) -->
+        <!-- Buttons inside Menu -->
+        <div class="menu-top-buttons">
+            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-top btn-dark">Register Team</a>
+            <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-top btn-blue">Join Discord</a>
+        </div>
+
+        <!-- Menu Links & Accordions -->
+        <a href="#top" class="mobile-menu-link" onclick="toggleMenu()">Home</a>
+        
+        <details>
+            <summary>Tournaments</summary>
+            <div class="sub-menu">
+                <a href="#" class="sub-link">Erangel Showdown</a>
+                <a href="#" class="sub-link">TDM Masters</a>
+                <a href="#" class="sub-link">Sanhok Rushers</a>
+                <a href="#" class="sub-link">Classic Scrims</a>
+            </div>
+        </details>
+
+        <a href="#" class="mobile-menu-link">Leaderboard</a>
+
+        <details>
+            <summary>Rules & Guidelines</summary>
+            <div class="sub-menu">
+                <a href="#" class="sub-link">Gameplay Rules</a>
+                <a href="#" class="sub-link">Points System</a>
+                <a href="#" class="sub-link">Anti-Cheat Policy</a>
+            </div>
+        </details>
+
+        <a href="#" class="mobile-menu-link">Prize Pool</a>
+
+        <details>
+            <summary>Support</summary>
+            <div class="sub-menu">
+                <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="sub-link">Discord Support</a>
+                <a href="#" class="sub-link">WhatsApp Help</a>
+                <a href="#" class="sub-link">FAQs</a>
+            </div>
+        </details>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container main-content">
+        
         <div class="top-action-buttons">
             <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-top btn-dark">Register Team</a>
             <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-top btn-blue">Join Discord</a>
         </div>
 
-        <!-- Main Title & Intro -->
         <h1>FukraGamer - Play Online BGMI Tournaments in India</h1>
         
         <p>FukraGamer supplies lots of competitive gaming services to Indian players. The website is overwhelmed with advanced and modern tournaments that can be played either for real money or in free scrims. Different variations of maps like Erangel, Sanhok, Miramar, and TDM customs are accessible for playing. Create your squad account at FukraGamer now and begin to have a lot of fun.</p>
 
-        <!-- Big Register Button -->
         <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-primary-large">Register Now</a>
 
-        <!-- Promo Image -->
         <div class="promo-banner">
             <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Esports Tournament">
             <div class="promo-caption">FukraGamer - Top BGMI Tournaments in India</div>
         </div>
 
-        <!-- Hot Tournaments Grid -->
         <h2>Hot Tournaments</h2>
         <div class="grid-2col">
             <div class="game-card">
@@ -281,7 +285,6 @@
             </div>
         </div>
 
-        <!-- Accordion Section -->
         <details>
             <summary>Tournament Content</summary>
             <div class="details-content">
@@ -291,103 +294,51 @@
             </div>
         </details>
 
-        <!-- About Table -->
         <h2>About Tournament</h2>
         <div class="info-box">
-            <div class="info-row">
-                <span>Organizer</span>
-                <span class="value">FukraGamer</span>
-            </div>
-            <div class="info-row">
-                <span>Game</span>
-                <span class="value">BGMI Mobile</span>
-            </div>
-            <div class="info-row">
-                <span>Entry Fee</span>
-                <span class="value">100 INR</span>
-            </div>
-            <div class="info-row">
-                <span>Prize Pool</span>
-                <span class="value">10,000 INR</span>
-            </div>
+            <div class="info-row"><span>Organizer</span><span class="value">FukraGamer</span></div>
+            <div class="info-row"><span>Game</span><span class="value">BGMI Mobile</span></div>
+            <div class="info-row"><span>Entry Fee</span><span class="value">100 INR</span></div>
+            <div class="info-row"><span>Prize Pool</span><span class="value">10,000 INR</span></div>
         </div>
 
-        <!-- Advantages Grid -->
         <h2>Advantages of FukraGamer</h2>
         <p>There are several reasons why players from India choose us as their preferred esports site. You should consider these advantages.</p>
         
         <div class="grid-2col">
-            <div class="feature-card">
-                <h3>Fair Play Monitored</h3>
-                <p>We use advanced spectating and strict rules to ensure no hackers or emulators ruin the game. Your skills define your victory.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Instant Payouts</h3>
-                <p>Once you secure your Chicken Dinner, your prize money is sent instantly via UPI, Google Pay, or Paytm. No waiting!</p>
-            </div>
-            <div class="feature-card">
-                <h3>High Prize Pools</h3>
-                <p>Compared to other organizers, we offer the most advantageous prize pools with very low entry fees for every squad.</p>
-            </div>
-            <div class="feature-card">
-                <h3>24/7 Support</h3>
-                <p>Our WhatsApp and Discord moderators are always available to solve room ID issues, registration queries, or disputes.</p>
-            </div>
+            <div class="feature-card"><h3>Fair Play Monitored</h3><p>We use advanced spectating and strict rules to ensure no hackers or emulators ruin the game. Your skills define your victory.</p></div>
+            <div class="feature-card"><h3>Instant Payouts</h3><p>Once you secure your Chicken Dinner, your prize money is sent instantly via UPI, Google Pay, or Paytm. No waiting!</p></div>
+            <div class="feature-card"><h3>High Prize Pools</h3><p>Compared to other organizers, we offer the most advantageous prize pools with very low entry fees for every squad.</p></div>
+            <div class="feature-card"><h3>24/7 Support</h3><p>Our WhatsApp and Discord moderators are always available to solve room ID issues, registration queries, or disputes.</p></div>
         </div>
 
-        <!-- Prize Pool Table -->
         <h2>Prize Distribution</h2>
         <div class="info-box">
-            <div class="info-row">
-                <span>1st Place (Winner)</span>
-                <span class="value">5,000 INR</span>
-            </div>
-            <div class="info-row">
-                <span>2nd Place (Runner up)</span>
-                <span class="value">3,000 INR</span>
-            </div>
-            <div class="info-row">
-                <span>3rd Place</span>
-                <span class="value">1,500 INR</span>
-            </div>
-            <div class="info-row">
-                <span>Most Kills (MVP)</span>
-                <span class="value">500 INR</span>
-            </div>
+            <div class="info-row"><span>1st Place (Winner)</span><span class="value">5,000 INR</span></div>
+            <div class="info-row"><span>2nd Place (Runner up)</span><span class="value">3,000 INR</span></div>
+            <div class="info-row"><span>3rd Place</span><span class="value">1,500 INR</span></div>
+            <div class="info-row"><span>Most Kills (MVP)</span><span class="value">500 INR</span></div>
         </div>
 
-        <!-- FAQ Accordions -->
         <h2>Frequently Asked Questions</h2>
-        
         <details>
             <summary>Are emulators allowed?</summary>
-            <div class="details-content">
-                <p>No, iPads and Emulators are strictly prohibited. Only mobile devices are allowed to maintain fair competition.</p>
-            </div>
+            <div class="details-content"><p>No, iPads and Emulators are strictly prohibited. Only mobile devices are allowed to maintain fair competition.</p></div>
         </details>
-        
         <details>
             <summary>How will I get Room ID and Password?</summary>
-            <div class="details-content">
-                <p>The Room ID and Password will be shared on your registered WhatsApp number exactly 15 minutes before the match starts.</p>
-            </div>
+            <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number exactly 15 minutes before the match starts.</p></div>
         </details>
-
         <details>
             <summary>What is the minimum entry fee?</summary>
-            <div class="details-content">
-                <p>We have daily free scrims. However, for mega tournaments, the standard entry fee is 100 INR per squad.</p>
-            </div>
+            <div class="details-content"><p>We have daily free scrims. However, for mega tournaments, the standard entry fee is 100 INR per squad.</p></div>
         </details>
 
-        <!-- Footer -->
         <footer>
             <div class="footer-logo">FukraGamer</div>
-            <p>© 2026 FukraGamer Esports | All Rights Reserved.</p>
-            <br>
+            <p>© 2026 FukraGamer Esports | All Rights Reserved.</p><br>
             <p style="text-decoration: underline;">Privacy Policy | Anti-Cheat Rules | Terms of Service</p>
         </footer>
-
     </div>
 
     <!-- Scroll to Top Button -->
@@ -401,6 +352,20 @@
         </div>
         <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-yellow">Join Now</a>
     </div>
+
+    <!-- JAVASCRIPT For Mobile Menu Toggle -->
+    <script>
+        function toggleMenu() {
+            // Hamburger icon nu X vich badalna
+            document.querySelector('.menu-icon').classList.toggle('active');
+            
+            // Overlay Menu nu slide in/out karna
+            document.getElementById('mobileMenu').classList.toggle('active');
+            
+            // Menu khulan te background nu scroll hon ton rokna
+            document.body.classList.toggle('no-scroll');
+        }
+    </script>
 
 </body>
 </html>
