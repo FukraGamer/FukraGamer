@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | FukraGamer Esports</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CORE COLORS & STYLES --- */
+        :root {
+            --bg-body: #0a141d;
+            --bg-card: #1a2c38;
+            --bg-header: #0f212e;
+            --text-main: #ffffff;
+            --text-muted: #b1bad3;
+            --accent-blue: #1475e1;
+            --accent-green: #00e701;
+            --accent-yellow: #fdda10;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 30px; }
+
+        /* --- HEADER --- */
+        header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10000; border-bottom: 1px solid #2a3d4a; }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+        .back-btn { background: none; border: none; color: var(--text-main); font-size: 16px; font-weight: bold; cursor: pointer; text-decoration: none; }
+
+        /* --- MAIN LAYOUT & PADDING --- */
+        .container { padding: 15px; max-width: 800px; margin: 0 auto; margin-top: 20px; }
+
+        /* --- CUSTOM REGISTRATION FORM (DARK THEME) --- */
+        .register-section { background-color: var(--bg-card); border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #2a3d4a; }
+        .register-section h2 { color: #fff; margin-bottom: 5px; font-size: 24px; }
+        .register-section .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
+        .form-control { width: 100%; padding: 12px 15px; background-color: #0a141d; border: 1px solid #2a3d4a; border-radius: 6px; color: #fff; font-size: 15px; transition: 0.3s; font-family: 'Roboto', sans-serif; }
+        .form-control:focus { border-color: var(--accent-blue); outline: none; box-shadow: 0 0 5px rgba(20, 117, 225, 0.3); }
+        select.form-control { appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%23b1bad3" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat: no-repeat; background-position: right 10px center; }
+        
+        .qr-box { background-color: #0a141d; padding: 20px; text-align: center; border-radius: 8px; border: 1px dashed var(--accent-green); margin: 25px 0; }
+        .qr-box img { max-width: 160px; margin: 10px 0; border-radius: 8px; }
+        .qr-text { color: var(--accent-green); font-weight: bold; font-size: 16px; margin-bottom: 5px; }
+        .qr-subtext { font-size: 13px; color: var(--text-muted); }
+
+        .discord-notice { background-color: rgba(20, 117, 225, 0.1); border-left: 4px solid var(--accent-blue); padding: 12px 15px; margin-bottom: 20px; font-size: 14px; border-radius: 0 6px 6px 0; }
+
+        .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; margin-bottom: 10px; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-primary-large:active { transform: scale(0.95); }
+
+        footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
+        .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER with Back Button -->
+    <header>
+        <a href="index.html" class="logo-text">FukraGamer</a>
+        <a href="index.html" class="back-btn">&larr; Back Home</a>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        
+        <!-- CUSTOM REGISTRATION FORM SECTION -->
+        <div class="register-section">
+            <h2>Register Your Squad</h2>
+            <p class="subtitle">Fill out the details below. Our platform is 100% secure. Room details will be sent to the Team Leader.</p>
+
+            <!-- IMPORTANT: Change the action link to your Formspree link later to get emails -->
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                
+                <div class="form-group">
+                    <label>Select Tournament</label>
+                    <select name="Tournament" class="form-control" required>
+                        <option value="" disabled selected>Select Match Type</option>
+                        <option value="Classic Mega Match">Classic Mega Match (Entry: 100 INR)</option>
+                        <option value="Daily TDM Clash">Daily TDM Clash 4v4 (Entry: 100 INR)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Team Name</label>
+                    <input type="text" name="Team Name" class="form-control" placeholder="Enter your Squad Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Team Leader WhatsApp Number</label>
+                    <input type="tel" name="WhatsApp Number" class="form-control" placeholder="For Room ID & Password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Player 1 (Leader) - IGN & Character ID</label>
+                    <input type="text" name="Player 1" class="form-control" placeholder="E.g. FukraX (5123456789)" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Player 2 - IGN & Character ID</label>
+                    <input type="text" name="Player 2" class="form-control" placeholder="E.g. FukraY (5987654321)" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Player 3 - IGN & Character ID</label>
+                    <input type="text" name="Player 3" class="form-control" placeholder="Enter Details" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Player 4 - IGN & Character ID</label>
+                    <input type="text" name="Player 4" class="form-control" placeholder="Enter Details" required>
+                </div>
+
+                <!-- QR CODE PAYMENT BOX -->
+                <div class="qr-box">
+                    <div class="qr-text">Scan & Pay Entry Fee (100 INR)</div>
+                    <div class="qr-subtext">Google Pay / PhonePe / Paytm</div>
+                    <!-- Upload QR photo as qr.png in Github -->
+                    <img src="qr.png" alt="Payment QR Code">
+                    <div class="qr-subtext">Take a screenshot after payment</div>
+                </div>
+
+                <!-- DISCORD INSTRUCTION -->
+                <div class="discord-notice">
+                    <strong>Important Step:</strong> Click "Submit Registration" below. Then, go to our Discord Server and open a Ticket to send your Payment Screenshot. Your slot will be confirmed only after verification.
+                </div>
+
+                <button type="submit" class="btn-primary-large">Submit Registration</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-logo">FukraGamer</div>
+            <p>2026 FukraGamer Esports | All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
