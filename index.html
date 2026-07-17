@@ -62,10 +62,10 @@
         .menu-icon.active span:nth-child(2) { opacity: 0; }
         .menu-icon.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-        /* --- MENU PC FIX --- */
+        /* --- FIXED MENU PC ALIGNMENT (RIGHT SIDE) --- */
         .menu-overlay { position: fixed; top: 60px; left: 0; width: 100vw; height: calc(100vh - 60px); background: rgba(0,0,0,0.7); z-index: 9998; opacity: 0; visibility: hidden; transition: 0.3s ease; }
         .menu-overlay.active { opacity: 1; visibility: visible; }
-        .mobile-menu { position: fixed; top: 60px; left: 0; width: 100%; max-width: 350px; height: calc(100vh - 60px); background-color: var(--bg-menu); z-index: 9999; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; padding: 20px; padding-bottom: 100px; box-shadow: 5px 0 15px rgba(0,0,0,0.5); }
+        .mobile-menu { position: fixed; top: 60px; right: 0; width: 100%; max-width: 350px; height: calc(100vh - 60px); background-color: var(--bg-menu); z-index: 9999; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; padding: 20px; padding-bottom: 100px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
         .mobile-menu.active { transform: translateX(0); }
         
         .menu-top-buttons { display: flex; gap: 10px; margin-bottom: 25px; }
