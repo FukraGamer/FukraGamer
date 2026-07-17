@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FukraGamer | Play BGMI Tournaments in India</title>
+    <title>FukraGamer | Play BGMI, FF Max & CODM Tournaments</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
@@ -149,7 +149,9 @@
         
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.7); border-color: var(--accent-blue); }
         
-        .game-card img { width: 100%; height: 120px; object-fit: cover; }
+        /* IMAGE FIX FOR PC: Replaced fixed height with aspect-ratio */
+        .game-card img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
+        
         .game-card .content { padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .game-card h3 { font-size: 14px; margin-bottom: 10px; color: #fff; }
         .game-card .btn-play { background-color: var(--accent-blue); color: #fff; padding: 8px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 14px; }
@@ -249,14 +251,14 @@
     <div class="container main-content">
         
         <div class="fade-in-up delay-2">
-            <h1>FukraGamer - Play Online BGMI Tournaments in India</h1>
-            <p>FukraGamer supplies lots of competitive gaming services to Indian players. The website is overwhelmed with advanced and modern tournaments that can be played either for real money or in free scrims. We host Classic Erangel matches and fast-paced TDM clashes daily. Create your squad account at FukraGamer now and begin to have a lot of fun.</p>
+            <h1>FukraGamer - Play Online Esports Tournaments in India</h1>
+            <p>FukraGamer is your ultimate destination for competitive esports in India. Join our daily cash tournaments and free scrims across India's top games. We host action-packed BGMI Classic & TDM matches, intense Free Fire Max Clash Squads, and strategic Call of Duty Mobile Multiplayer battles. Register your team today, dominate the leaderboards, and start winning real money!</p>
             <a href="register.html" class="btn-primary-large">Register Now</a>
         </div>
 
         <div class="promo-banner fade-in-up delay-3">
             <img src="bgmi-tournament.png" alt="Esports Tournament">
-            <div class="promo-caption">FukraGamer - Top BGMI, CoD Mobile & Free Fire Max Tournaments in India</div>
+            <div class="promo-caption">FukraGamer - Top BGMI, FF Max & CODM Tournaments in India</div>
         </div>
 
         <h2 class="fade-in-up delay-4">Active Tournaments</h2>
@@ -283,7 +285,7 @@
                 </div>
             </div>
             <div class="game-card">
-                <img src="codm.png" alt="Call of Duty Mobile">
+                <img src="cod.png" alt="Call of Duty Mobile">
                 <div class="content">
                     <h3>COD Mobile Multiplayer</h3>
                     <a href="register.html" class="btn-play">Join Now</a>
@@ -294,7 +296,7 @@
         <h2 class="fade-in-up delay-5">Rules & Prize Distribution</h2>
         
         <details class="fade-in-up delay-5">
-            <summary>Classic Mega Matches (25 Teams)</summary>
+            <summary>BGMI Classic Mega Matches (25 Teams)</summary>
             <div class="details-content">
                 <p>Entry Fee: 100 INR Per Squad (25 INR per player). The total prize pool unlocks fully when 25 teams are registered.</p>
                 <div class="info-box">
@@ -309,7 +311,7 @@
         </details>
 
         <details class="fade-in-up delay-5">
-            <summary>Daily TDM Clashes (4v4)</summary>
+            <summary>BGMI Daily TDM Clashes (4v4)</summary>
             <div class="details-content">
                 <p>Fast-paced head-to-head matches. Winner takes all. The match starts as soon as two teams are ready and registered.</p>
                 <div class="info-box">
@@ -325,10 +327,46 @@
             </div>
         </details>
 
+        <!-- ADDED FREE FIRE MAX RULES -->
+        <details class="fade-in-up delay-5">
+            <summary>Free Fire Max Clash Squad (4v4)</summary>
+            <div class="details-content">
+                <p>Intense custom room battles. The team that reaches the target round wins first claims the prize.</p>
+                <div class="info-box">
+                    <div class="info-row"><span>Format</span><span class="value">4v4 Clash Squad</span></div>
+                    <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
+                    <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
+                </div>
+                <p>Strict Free Fire Rules:</p>
+                <p>1. Character Skills and Gun Attributes must be turned OFF.</p>
+                <p>2. No Grenades or Flashbangs allowed (Gloo Walls permitted).</p>
+                <p>3. Use of emulators (BlueStacks, etc.) is strictly prohibited.</p>
+                <p>4. Hacks, glitches, or teaming up will result in an instant ban.</p>
+            </div>
+        </details>
+
+        <!-- ADDED COD MOBILE RULES -->
+        <details class="fade-in-up delay-5">
+            <summary>COD Mobile Multiplayer (5v5)</summary>
+            <div class="details-content">
+                <p>Strategic 5v5 Search & Destroy (S&D) custom matches. True tactical gameplay.</p>
+                <div class="info-box">
+                    <div class="info-row"><span>Format</span><span class="value">5v5 S&D</span></div>
+                    <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
+                    <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
+                </div>
+                <p>Strict CODM Rules:</p>
+                <p>1. Operator Skills and Scorestreaks are strictly prohibited.</p>
+                <p>2. LMGs, Shotguns, and NA-45 Snipers are NOT allowed.</p>
+                <p>3. iPads are allowed, but PC Emulators (Gameloop) are banned.</p>
+                <p>4. All players must be ready in the lobby 10 minutes before the match time.</p>
+            </div>
+        </details>
+
         <h2 class="fade-in-up delay-5">Frequently Asked Questions</h2>
         <details class="fade-in-up delay-5">
             <summary>Are emulators allowed?</summary>
-            <div class="details-content"><p>No, iPads and Emulators are strictly prohibited. Only mobile devices are allowed to maintain fair competition.</p></div>
+            <div class="details-content"><p>No, Emulators are strictly prohibited across all games. Only mobile devices (and iPads where specified) are allowed to maintain fair competition.</p></div>
         </details>
         <details class="fade-in-up delay-5">
             <summary>How will I get Room ID and Password?</summary>
@@ -347,8 +385,8 @@
 
     <div class="sticky-bottom">
         <div class="sticky-text">
-            <span class="sticky-title">BGMI SHOWDOWN</span>
-            <span class="sticky-sub">PRIZE POOL: UP TO 2000 INR</span>
+            <span class="sticky-title">ESPORTS SHOWDOWN</span>
+            <span class="sticky-sub">DAILY CASH TOURNAMENTS</span>
         </div>
         <a href="register.html" class="btn-yellow">Join Now</a>
     </div>
