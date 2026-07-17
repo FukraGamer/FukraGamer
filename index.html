@@ -27,12 +27,17 @@
         body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 70px; }
         body.no-scroll { overflow: hidden; } 
 
-        /* --- PRELOADER --- */
+        /* --- PRELOADER (STARS WAPIS AA GAYE) --- */
         .preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--bg-header); display: flex; justify-content: center; align-items: center; z-index: 99999; animation: fadeOutScreen 0.5s ease-in-out 2.5s forwards; }
         .preloader-container { position: relative; display: flex; align-items: center; }
         .brand-logo { font-family: 'Poppins', sans-serif; font-size: clamp(28px, 6vw, 42px); font-weight: 900; color: var(--text-main); letter-spacing: -1px; opacity: 0; transform: scale(0.9); animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
-        
+        .star { position: absolute; color: var(--text-main); font-size: 16px; opacity: 0; animation: sparklePop 0.5s ease-out forwards; }
+        .star-1 { top: -20px; left: 5px; animation-delay: 0.6s; }
+        .star-2 { top: -10px; right: -20px; animation-delay: 0.8s; }
+        .star-3 { bottom: -10px; left: -20px; animation-delay: 1s; }
+
         @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes sparklePop { 0% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.8; transform: scale(1); } }
         @keyframes fadeOutScreen { to { opacity: 0; visibility: hidden; } }
 
         /* --- HEADER & MENU --- */
@@ -113,9 +118,12 @@
 </head>
 <body id="top">
 
-    <!-- PRELOADER -->
+    <!-- PRELOADER (STARS WAPIS AA GAYE) -->
     <div class="preloader">
         <div class="preloader-container">
+            <span class="star star-1">✦</span>
+            <span class="star star-2">✦</span>
+            <span class="star star-3">✦</span>
             <div class="brand-logo">FukraGamer</div>
         </div>
     </div>
@@ -260,8 +268,10 @@
         </footer>
     </div>
 
+    <!-- Scroll to Top Button -->
     <a href="#top" class="scroll-top">^</a>
 
+    <!-- STICKY BOTTOM BAR -->
     <div class="sticky-bottom">
         <div class="sticky-text">
             <span class="sticky-title">BGMI SHOWDOWN</span>
@@ -270,6 +280,7 @@
         <a href="register.html" class="btn-yellow">Join Now</a>
     </div>
 
+    <!-- JAVASCRIPT -->
     <script>
         function toggleMenu() {
             document.querySelector('.menu-icon').classList.toggle('active');
