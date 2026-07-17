@@ -21,7 +21,6 @@
             --accent-yellow: #fdda10;
         }
 
-        /* Improvisation: Smooth scrolling for the whole page */
         html {
             scroll-behavior: smooth;
         }
@@ -117,14 +116,13 @@
         }
 
         /* --- BUTTONS & ANIMATIONS --- */
-        /* Improvisation: All buttons get a press effect on click */
         .btn-top, .btn-primary-large, .btn-play, .btn-yellow, .scroll-top {
             transition: all 0.2s ease;
             cursor: pointer;
-            display: inline-block; /* Helps with transforms */
+            display: inline-block;
         }
         .btn-top:active, .btn-primary-large:active, .btn-play:active, .btn-yellow:active, .scroll-top:active {
-            transform: scale(0.95); /* Button dabaan da effect */
+            transform: scale(0.95);
         }
 
         .top-action-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -150,7 +148,7 @@
         .promo-banner img { width: 100%; display: block; border-radius: 8px; }
         .promo-caption { background: var(--bg-card); padding: 10px 15px; font-size: 14px; font-weight: 700; border-radius: 0 0 8px 8px; margin-top: -5px; }
 
-        /* --- GRIDS (Tournaments / Hot Games) --- */
+        /* --- GRIDS (Tournaments) --- */
         .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
         .game-card { background-color: var(--bg-card); border-radius: 8px; overflow: hidden; text-align: center; display: flex; flex-direction: column; }
         .game-card img { width: 100%; height: 120px; object-fit: cover; }
@@ -168,7 +166,6 @@
         details[open] summary::after { content: '⌃'; }
         .details-content { padding: 0 16px 16px 16px; color: var(--text-muted); line-height: 1.6; }
 
-        /* Info Table Box */
         .info-box { background-color: var(--bg-card); border-radius: 8px; padding: 20px; margin-bottom: 25px; }
         .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #2a3d4a; font-size: 15px; }
         .info-row:last-child { border-bottom: none; }
@@ -206,7 +203,7 @@
         .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; }
     </style>
 </head>
-<body id="top"> <!-- Added ID 'top' for smooth scrolling back to top -->
+<body id="top">
 
     <!-- PRELOADER -->
     <div class="preloader">
@@ -231,12 +228,10 @@
     <!-- MAIN CONTENT -->
     <div class="container">
         
-        <!-- Top Action Buttons (Now Opening in New Tab) -->
+        <!-- Top Action Buttons (Ethe discord da nava link pa dita hai) -->
         <div class="top-action-buttons">
-            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-top btn-dark">📝 Register Team</a>
-            
-            <!-- Discord Button linked to your username -->
-            <a href="https://discordapp.com/users/biebersarpanch" target="_blank" class="btn-top btn-blue">👾 Join Discord</a>
+            <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-top btn-dark">Register Team</a>
+            <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-top btn-blue">Join Discord</a>
         </div>
 
         <!-- Main Title & Intro -->
@@ -245,7 +240,7 @@
         <p>FukraGamer supplies lots of competitive gaming services to Indian players. The website is overwhelmed with advanced and modern tournaments that can be played either for real money or in free scrims. Different variations of maps like Erangel, Sanhok, Miramar, and TDM customs are accessible for playing. Create your squad account at FukraGamer now and begin to have a lot of fun.</p>
 
         <!-- Big Register Button -->
-        <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-primary-large">🚀 Register Now</a>
+        <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-primary-large">Register Now</a>
 
         <!-- Promo Image -->
         <div class="promo-banner">
@@ -254,34 +249,34 @@
         </div>
 
         <!-- Hot Tournaments Grid -->
-        <h2>🔥 Hot Tournaments</h2>
+        <h2>Hot Tournaments</h2>
         <div class="grid-2col">
             <div class="game-card">
                 <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Erangel">
                 <div class="content">
                     <h3>Erangel Showdown</h3>
-                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">⚡ Join Now</a>
+                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">Join Now</a>
                 </div>
             </div>
             <div class="game-card">
                 <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="TDM">
                 <div class="content">
                     <h3>4v4 TDM Masters</h3>
-                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">⚡ Join Now</a>
+                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">Join Now</a>
                 </div>
             </div>
             <div class="game-card">
                 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Sanhok">
                 <div class="content">
                     <h3>Sanhok Rushers</h3>
-                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">⚡ Join Now</a>
+                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">Join Now</a>
                 </div>
             </div>
             <div class="game-card">
                 <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Classic">
                 <div class="content">
                     <h3>Classic Free Scrims</h3>
-                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">⚡ Join Now</a>
+                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-play">Join Now</a>
                 </div>
             </div>
         </div>
@@ -344,19 +339,19 @@
         <h2>Prize Distribution</h2>
         <div class="info-box">
             <div class="info-row">
-                <span>🥇 1st Place (Winner)</span>
+                <span>1st Place (Winner)</span>
                 <span class="value">5,000 INR</span>
             </div>
             <div class="info-row">
-                <span>🥈 2nd Place (Runner up)</span>
+                <span>2nd Place (Runner up)</span>
                 <span class="value">3,000 INR</span>
             </div>
             <div class="info-row">
-                <span>🥉 3rd Place</span>
+                <span>3rd Place</span>
                 <span class="value">1,500 INR</span>
             </div>
             <div class="info-row">
-                <span>💀 Most Kills (MVP)</span>
+                <span>Most Kills (MVP)</span>
                 <span class="value">500 INR</span>
             </div>
         </div>
@@ -395,8 +390,7 @@
 
     </div>
 
-    <!-- Scroll to Top Button (Smooth scroll link to top ID) -->
-    <!-- target="_blank" is intentionally NOT added here because it should scroll the current page -->
+    <!-- Scroll to Top Button -->
     <a href="#top" class="scroll-top">^</a>
 
     <!-- STICKY BOTTOM BAR -->
@@ -405,7 +399,7 @@
             <span class="sticky-title">BGMI SHOWDOWN</span>
             <span class="sticky-sub">PRIZE POOL: ₹10,000</span>
         </div>
-        <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-yellow">🔥 Join Now</a>
+        <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-yellow">Join Now</a>
     </div>
 
 </body>
