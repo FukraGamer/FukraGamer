@@ -74,9 +74,14 @@
             <form id="registrationForm">
                 <div class="form-group">
                     <label>Select Tournament</label>
-                    <select name="Tournament" class="form-control" required>
-                        <option value="Classic Mega Match">Classic Mega Match (Entry: 100 INR)</option>
-                        <option value="Daily TDM Clash">Daily TDM Clash 4v4 (Entry: 100 INR)</option>
+                    <select id="tournamentSelect" name="Tournament" class="form-control" required>
+                        <option value="" disabled selected>-- Choose a Tournament --</option>
+                        <option value="BGMI Classic Mega Match">BGMI Classic Mega Match (Entry: 100 INR)</option>
+                        <option value="BGMI Daily TDM Clash (4v4)">BGMI Daily TDM Clash 4v4 (Entry: 100 INR)</option>
+                        <option value="Free Fire Max Battle Royale">Free Fire Max Battle Royale (Entry: 100 INR)</option>
+                        <option value="Free Fire Max Clash Squad (4v4)">Free Fire Max Clash Squad 4v4 (Entry: 100 INR)</option>
+                        <option value="COD Mobile Battle Royale">COD Mobile Battle Royale (Entry: 100 INR)</option>
+                        <option value="COD Mobile Multiplayer (5v5)">COD Mobile Multiplayer 5v5 (Entry: 100 INR)</option>
                     </select>
                 </div>
 
@@ -127,6 +132,7 @@
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault(); 
 
+        const selectedTournament = document.getElementById('tournamentSelect').value;
         const teamName = document.getElementById('teamName').value;
         const player1 = document.getElementById('player1').value;
         const player2 = document.getElementById('player2').value;
@@ -136,8 +142,9 @@
         // Tuhade provided Webhook URL
         const webhookURL = "https://discord.com/api/webhooks/1527673758494494871/ZNCbZOemk3FDrrZCWFfjMrtJGWufCdd9vPDIZ_DdcJudF8Zk5D_V28YRutPCqmdoZhkv"; 
 
+        // Added Tournament Field to the Discord Message
         const message = {
-            content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for screenshot in #verify-payment ticket.*`
+            content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Tournament:** ${selectedTournament}\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for screenshot in #verify-payment ticket.*`
         };
 
         const submitBtn = document.querySelector('button[type="submit"]');
