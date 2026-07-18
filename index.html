@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FukraGamer | Play BGMI, FF Max & COD Mobile Tournaments</title>
+    <title>FukraGamerWorld | Play BGMI, FF Max & COD Mobile Tournaments</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
@@ -78,6 +78,17 @@
         .mobile-menu .sub-menu { padding: 0 0 15px 20px; }
         .mobile-menu .sub-link { display: block; padding: 12px 0; color: var(--text-muted); text-decoration: none; font-size: 15px; }
 
+        /* --- VIDEO BACKGROUND STYLES --- */
+        .video-hero { position: relative; height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; margin-top: -70px; }
+        #bgmi-video { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -2; transition: opacity 0.1s ease-out; }
+        .video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(to bottom, rgba(10, 20, 29, 0.4) 0%, rgba(10, 20, 29, 1) 100%); z-index: -1; }
+        .hero-text { position: relative; z-index: 1; max-width: 700px; margin-top: 50px; }
+        .hero-text h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 900; line-height: 1.2; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.8); color: #fff; }
+        .hero-text p { font-size: 16px; line-height: 1.6; margin-bottom: 25px; text-shadow: 0 2px 5px rgba(0,0,0,0.8); color: #e0e0e0; }
+        
+        /* --- SOLID CONTENT OVERLAP STYLES --- */
+        .solid-content-wrapper { position: relative; background-color: var(--bg-body); z-index: 2; box-shadow: 0 -20px 40px rgba(0,0,0,0.9); padding-top: 40px; }
+
         /* --- RETENTION POP-UP MODAL --- */
         .welcome-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 20, 29, 0.9); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 100000; opacity: 0; visibility: hidden; transition: 0.4s ease; }
         .welcome-modal.active { opacity: 1; visibility: visible; }
@@ -98,7 +109,6 @@
         .btn-blue { background-color: var(--accent-blue); color: #fff; }
         .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; margin-bottom: 25px; }
 
-        h1 { font-size: 26px; font-weight: 700; line-height: 1.3; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         h2 { font-size: 22px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         p { color: var(--text-muted); line-height: 1.6; font-size: 15px; margin-bottom: 20px; }
 
@@ -147,6 +157,7 @@
             <span class="star star-1">✦</span>
             <span class="star star-2">✦</span>
             <span class="star star-3">✦</span>
+            <!-- Preloader text same (FukraGamer) -->
             <div class="brand-logo">FukraGamer</div>
         </div>
     </div>
@@ -157,14 +168,15 @@
             <span class="close-btn" onclick="closeModal()">×</span>
             <h2 class="modal-title">WIN ₹2,000 DAILY! 🏆</h2>
             <p class="modal-text">Play BGMI, Free Fire Max & COD Mobile tournaments. Register your squad now and start earning real cash from your skills.</p>
-            <a href="register.html" class="btn-primary-large" style="margin-bottom: 0;">Claim Your Slot Now</a>
+            <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-primary-large" style="margin-bottom: 0;">Claim Your Slot Now</a>
         </div>
     </div>
 
     <header>
         <a href="index.html" class="brand-link">
             <img src="logo.png" alt="Logo" class="header-logo">
-            <span class="logo-text">FukraGamer</span>
+            <!-- Header Text changed to FukraGamerWorld -->
+            <span class="logo-text">FukraGamerWorld</span>
         </a>
         <div class="menu-icon" onclick="toggleMenu()">
             <span></span>
@@ -185,14 +197,25 @@
         <details>
             <summary>Tournaments</summary>
             <div class="sub-menu">
-                <a href="register.html" class="sub-link">BGMI Tournaments</a>
-                <a href="register.html" class="sub-link">Free Fire Tournaments</a>
-                <a href="register.html" class="sub-link">COD Mobile Tournaments</a>
+                <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="sub-link">BGMI Tournaments</a>
+                <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="sub-link">Free Fire Tournaments</a>
+                <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="sub-link">COD Mobile Tournaments</a>
             </div>
         </details>
 
         <a href="#" class="mobile-menu-link">Leaderboard</a>
-        <a href="#refer-earn-section" class="mobile-menu-link" onclick="toggleMenu()">Refer & Earn</a> <!-- ADDED MENU LINK -->
+        
+        <!-- MOVED REFER & EARN INSIDE THE MENU -->
+        <details>
+            <summary style="color: var(--accent-yellow);">💸 Refer & Earn</summary>
+            <div class="sub-menu" style="padding-right: 15px;">
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">Invite friends & earn ₹20 per signup. Your friend gets a ₹10 bonus!</p>
+                <div style="background: #0f212e; padding: 8px 10px; border-radius: 6px; display: flex; align-items: center; gap: 5px; margin-bottom: 10px; border: 1px solid #2a3d4a;">
+                    <input type="text" id="refLinkInput" value="https://fukragamer.com/?ref=FUKRA99" readonly style="flex: 1; background: transparent; border: none; color: #fff; font-size: 12px; outline: none; width: 100%;">
+                    <button id="copyRefBtn" onclick="copyRefLink()" style="background: var(--accent-blue); color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; flex-shrink: 0; transition: 0.3s;">Copy</button>
+                </div>
+            </div>
+        </details>
 
         <details>
             <summary>Rules</summary>
@@ -212,204 +235,200 @@
         </details>
     </div>
 
-    <div class="container main-content">
+    <!-- NEW VIDEO HERO SECTION -->
+    <div class="video-hero">
+        <video autoplay muted loop playsinline id="bgmi-video">
+            <!-- ETHE APNI VIDEO DA NAAM PAO -->
+            <source src="tuhadi-video-da-link.mp4" type="video/mp4"> 
+        </video>
+        <div class="video-overlay"></div>
         
-        <div class="fade-in-up delay-2">
-            <h1>FukraGamer - Play Online Esports Tournaments in India</h1>
-            <p>FukraGamer is your ultimate destination for competitive esports in India. Join our daily cash tournaments and free scrims across India's top games. We host action-packed BGMI Classic & TDM matches, intense Free Fire Max Clash Squads, and strategic Call of Duty Mobile Multiplayer battles. Register your team today, dominate the leaderboards, and start winning real money!</p>
-            <a href="register.html" class="btn-primary-large">Register Now</a>
+        <div class="hero-text fade-in-up delay-2">
+            <h1>FukraGamerWorld - Play Online Esports Tournaments in India</h1>
+            <p>Join our daily cash tournaments across BGMI, Free Fire Max & COD Mobile. Register your team today, dominate the leaderboards, and start winning real money!</p>
+            <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-primary-large" style="width: auto; display: inline-block; padding: 15px 40px; margin-top: 10px;">Register on Discord</a>
         </div>
-
-        <div class="promo-banner fade-in-up delay-3">
-            <img src="bgmi-tournament.png" alt="Esports Tournament">
-            <div class="promo-caption">FukraGamer - Top BGMI, Free Fire Max & COD Mobile Tournaments in India</div>
-        </div>
-
-        <!-- ADDED REFER & EARN SECTION -->
-        <h2 id="refer-earn-section" class="fade-in-up delay-4">💸 Refer & Earn</h2>
-        <div class="info-box fade-in-up delay-4" style="border-color: var(--accent-yellow); box-shadow: inset 0 4px 15px rgba(253, 218, 16, 0.1);">
-            <h3 style="color: var(--accent-yellow); margin-bottom: 10px; font-size: 18px;">Invite Friends, Earn Real Cash!</h3>
-            <p style="font-size: 14px; margin-bottom: 15px;">Share your unique link below. When your friend signs up and plays their first match, you get <strong>₹20</strong> and they get a <strong>₹10</strong> sign-up bonus!</p>
-            
-            <div style="background: #0f212e; padding: 10px 15px; border-radius: 6px; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border: 1px solid #2a3d4a;">
-                <input type="text" id="refLinkInput" value="https://fukragamer.com/?ref=FUKRA99" readonly style="flex: 1; background: transparent; border: none; color: #fff; font-size: 13px; outline: none; width: 100%;">
-                <button id="copyRefBtn" onclick="copyRefLink()" style="background: var(--accent-blue); color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; flex-shrink: 0; transition: 0.3s;">Copy</button>
-            </div>
-            
-            <div class="info-row"><span>Your Reward</span><span class="value" style="color: var(--accent-yellow);">₹20 per friend</span></div>
-            <div class="info-row"><span>Friend's Bonus</span><span class="value" style="color: var(--accent-yellow);">₹10 on sign up</span></div>
-        </div>
-        <!-- END REFER & EARN SECTION -->
-
-        <h2 class="fade-in-up delay-4">Active Tournaments</h2>
-        <div class="grid-2col fade-in-up delay-4">
-            <!-- BGMI CARDS -->
-            <div class="game-card">
-                <img src="classic.png" alt="BGMI Classic">
-                <div class="content">
-                    <h3>BGMI Classic Mega Match</h3>
-                    <a href="register.html" class="btn-play">Join Now</a>
-                </div>
-            </div>
-            <div class="game-card">
-                <img src="tdm.png" alt="BGMI TDM">
-                <div class="content">
-                    <h3>BGMI Daily TDM Clash (4v4)</h3>
-                    <a href="register.html" class="btn-play">Join Now</a>
-                </div>
-            </div>
-            
-            <!-- FREE FIRE CARDS -->
-            <div class="game-card">
-                <img src="freefire.png" alt="Free Fire Classic">
-                <div class="content">
-                    <h3>Free Fire Max Battle Royale</h3>
-                    <a href="register.html" class="btn-play">Join Now</a>
-                </div>
-            </div>
-            <div class="game-card">
-                <img src="freefire-tdm.png" alt="Free Fire Clash Squad">
-                <div class="content">
-                    <h3>Free Fire Max Clash Squad (4v4)</h3>
-                    <a href="register.html" class="btn-play">Join Now</a>
-                </div>
-            </div>
-
-            <!-- COD MOBILE CARDS -->
-            <div class="game-card">
-                <img src="cod.png" alt="COD Mobile Battle Royale">
-                <div class="content">
-                    <h3>COD Mobile Battle Royale</h3>
-                    <a href="register.html" class="btn-play">Join Now</a>
-                </div>
-            </div>
-            <div class="game-card">
-                <img src="cod-tdm.png" alt="COD Mobile Multiplayer">
-                <div class="content">
-                    <h3>COD Mobile Multiplayer (5v5)</h3>
-                    <a href="register.html" class="btn-play">Join Now</a>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="fade-in-up delay-5">Rules & Prize Distribution</h2>
-        
-        <!-- BGMI RULES -->
-        <details class="fade-in-up delay-5">
-            <summary>BGMI Classic Mega Matches (25 Teams)</summary>
-            <div class="details-content">
-                <p>Entry Fee: 100 INR Per Squad (25 INR per player). The total prize pool unlocks fully when 25 teams are registered.</p>
-                <div class="info-box">
-                    <div class="info-row"><span>Total Prize Pool</span><span class="value">Up to 2,000 INR</span></div>
-                    <div class="info-row"><span>1st Place (40%)</span><span class="value">Up to 800 INR</span></div>
-                    <div class="info-row"><span>2nd Place (20%)</span><span class="value">Up to 400 INR</span></div>
-                    <div class="info-row"><span>3rd Place (10%)</span><span class="value">Up to 200 INR</span></div>
-                    <div class="info-row"><span>Most Kills / MVP</span><span class="value">Up to 150 INR</span></div>
-                </div>
-                <p>Note: To ensure zero cancellation, if slots are not fully booked, the prize pool will be distributed dynamically based on 80% of the total collected amount.</p>
-            </div>
-        </details>
-
-        <details class="fade-in-up delay-5">
-            <summary>BGMI Daily TDM Clashes (4v4)</summary>
-            <div class="details-content">
-                <p>Fast-paced head-to-head matches. Winner takes all. The match starts as soon as two teams are ready and registered.</p>
-                <div class="info-box">
-                    <div class="info-row"><span>Format</span><span class="value">Team A vs Team B</span></div>
-                    <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
-                    <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
-                </div>
-                <p>Strict TDM Rules:</p>
-                <p>1. Only M416 Allowed (No Groza, Snipers, or Shotguns).</p>
-                <p>2. Slide must be turned OFF.</p>
-                <p>3. No Grenades or Stun Grenades allowed.</p>
-                <p>4. Use of prohibited items will result in immediate disqualification.</p>
-            </div>
-        </details>
-
-        <!-- FREE FIRE MAX RULES -->
-        <details class="fade-in-up delay-5">
-            <summary>Free Fire Max Battle Royale (12 Teams)</summary>
-            <div class="details-content">
-                <p>Entry Fee: 100 INR Per Squad. Survive and conquer Bermuda. Total prize pool unlocks when 12 squads (48 players) register.</p>
-                <div class="info-box">
-                    <div class="info-row"><span>Total Prize Pool</span><span class="value">Up to 1,000 INR</span></div>
-                    <div class="info-row"><span>1st Place (Booyah)</span><span class="value">Up to 500 INR</span></div>
-                    <div class="info-row"><span>2nd Place</span><span class="value">Up to 250 INR</span></div>
-                    <div class="info-row"><span>3rd Place</span><span class="value">Up to 150 INR</span></div>
-                    <div class="info-row"><span>Most Kills / MVP</span><span class="value">Up to 100 INR</span></div>
-                </div>
-                <p>Note: Prize pool adjusts based on the number of registered teams.</p>
-            </div>
-        </details>
-
-        <details class="fade-in-up delay-5">
-            <summary>Free Fire Max Clash Squad (4v4)</summary>
-            <div class="details-content">
-                <p>Intense custom room battles. The team that reaches the target round wins first claims the prize.</p>
-                <div class="info-box">
-                    <div class="info-row"><span>Format</span><span class="value">4v4 Clash Squad</span></div>
-                    <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
-                    <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
-                </div>
-                <p>Strict Free Fire Rules:</p>
-                <p>1. Character Skills and Gun Attributes must be turned OFF.</p>
-                <p>2. No Grenades or Flashbangs allowed (Gloo Walls permitted).</p>
-                <p>3. Use of emulators (BlueStacks, etc.) is strictly prohibited.</p>
-                <p>4. Hacks, glitches, or teaming up will result in an instant ban.</p>
-            </div>
-        </details>
-
-        <!-- COD MOBILE RULES -->
-        <details class="fade-in-up delay-5">
-            <summary>COD Mobile Battle Royale (25 Teams)</summary>
-            <div class="details-content">
-                <p>Entry Fee: 100 INR Per Squad (25 INR per player). Drop into Isolated or Blackout. Total prize pool unlocks when 25 teams are registered.</p>
-                <div class="info-box">
-                    <div class="info-row"><span>Total Prize Pool</span><span class="value">Up to 2,000 INR</span></div>
-                    <div class="info-row"><span>1st Place (40%)</span><span class="value">Up to 800 INR</span></div>
-                    <div class="info-row"><span>2nd Place (20%)</span><span class="value">Up to 400 INR</span></div>
-                    <div class="info-row"><span>3rd Place (10%)</span><span class="value">Up to 200 INR</span></div>
-                    <div class="info-row"><span>Most Kills / MVP</span><span class="value">Up to 150 INR</span></div>
-                </div>
-                <p>Note: Prize pool is dynamically distributed based on 80% of total collection if slots are partially filled.</p>
-            </div>
-        </details>
-
-        <details class="fade-in-up delay-5">
-            <summary>COD Mobile Multiplayer (5v5)</summary>
-            <div class="details-content">
-                <p>Strategic 5v5 Search & Destroy (S&D) custom matches. True tactical gameplay.</p>
-                <div class="info-box">
-                    <div class="info-row"><span>Format</span><span class="value">5v5 S&D</span></div>
-                    <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
-                    <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
-                </div>
-                <p>Strict COD Mobile Rules:</p>
-                <p>1. Operator Skills and Scorestreaks are strictly prohibited.</p>
-                <p>2. LMGs, Shotguns, and NA-45 Snipers are NOT allowed.</p>
-                <p>3. iPads are allowed, but PC Emulators (Gameloop) are banned.</p>
-                <p>4. All players must be ready in the lobby 10 minutes before the match time.</p>
-            </div>
-        </details>
-
-        <h2 class="fade-in-up delay-5">Frequently Asked Questions</h2>
-        <details class="fade-in-up delay-5">
-            <summary>Are emulators allowed?</summary>
-            <div class="details-content"><p>No, Emulators are strictly prohibited across all games. Only mobile devices (and iPads where specified) are allowed to maintain fair competition.</p></div>
-        </details>
-        <details class="fade-in-up delay-5">
-            <summary>How will I get Room ID and Password?</summary>
-            <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number and on our Discord server exactly 15 minutes before the match starts.</p></div>
-        </details>
-
-        <footer class="fade-in-up delay-5">
-            <div class="footer-logo">FukraGamer</div>
-            <p>2026 FukraGamer Esports | All Rights Reserved.</p>
-            <br>
-            <p style="text-decoration: underline;">Privacy Policy | Anti-Cheat Rules | Terms of Service</p>
-        </footer>
     </div>
+
+    <!-- MAIN CONTENT SCROLL WRAPPER -->
+    <div class="solid-content-wrapper">
+        <div class="container main-content">
+            
+            <div class="promo-banner fade-in-up delay-3">
+                <img src="bgmi-tournament.png" alt="Esports Tournament">
+                <div class="promo-caption">FukraGamerWorld - Top BGMI, Free Fire Max & COD Mobile Tournaments in India</div>
+            </div>
+
+            <h2 class="fade-in-up delay-4">Active Tournaments</h2>
+            <div class="grid-2col fade-in-up delay-4">
+                <!-- BGMI CARDS -->
+                <div class="game-card">
+                    <img src="classic.png" alt="BGMI Classic">
+                    <div class="content">
+                        <h3>BGMI Classic Mega Match</h3>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-play">Join Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="tdm.png" alt="BGMI TDM">
+                    <div class="content">
+                        <h3>BGMI Daily TDM Clash (4v4)</h3>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-play">Join Now</a>
+                    </div>
+                </div>
+                
+                <!-- FREE FIRE CARDS -->
+                <div class="game-card">
+                    <img src="freefire.png" alt="Free Fire Classic">
+                    <div class="content">
+                        <h3>Free Fire Max Battle Royale</h3>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-play">Join Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="freefire-tdm.png" alt="Free Fire Clash Squad">
+                    <div class="content">
+                        <h3>Free Fire Max Clash Squad (4v4)</h3>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-play">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- COD MOBILE CARDS -->
+                <div class="game-card">
+                    <img src="cod.png" alt="COD Mobile Battle Royale">
+                    <div class="content">
+                        <h3>COD Mobile Battle Royale</h3>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-play">Join Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="cod-tdm.png" alt="COD Mobile Multiplayer">
+                    <div class="content">
+                        <h3>COD Mobile Multiplayer (5v5)</h3>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-play">Join Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="fade-in-up delay-5">Rules & Prize Distribution</h2>
+            
+            <!-- BGMI RULES -->
+            <details class="fade-in-up delay-5">
+                <summary>BGMI Classic Mega Matches (25 Teams)</summary>
+                <div class="details-content">
+                    <p>Entry Fee: 100 INR Per Squad (25 INR per player). The total prize pool unlocks fully when 25 teams are registered.</p>
+                    <div class="info-box">
+                        <div class="info-row"><span>Total Prize Pool</span><span class="value">Up to 2,000 INR</span></div>
+                        <div class="info-row"><span>1st Place (40%)</span><span class="value">Up to 800 INR</span></div>
+                        <div class="info-row"><span>2nd Place (20%)</span><span class="value">Up to 400 INR</span></div>
+                        <div class="info-row"><span>3rd Place (10%)</span><span class="value">Up to 200 INR</span></div>
+                        <div class="info-row"><span>Most Kills / MVP</span><span class="value">Up to 150 INR</span></div>
+                    </div>
+                    <p>Note: To ensure zero cancellation, if slots are not fully booked, the prize pool will be distributed dynamically based on 80% of the total collected amount.</p>
+                </div>
+            </details>
+
+            <details class="fade-in-up delay-5">
+                <summary>BGMI Daily TDM Clashes (4v4)</summary>
+                <div class="details-content">
+                    <p>Fast-paced head-to-head matches. Winner takes all. The match starts as soon as two teams are ready and registered.</p>
+                    <div class="info-box">
+                        <div class="info-row"><span>Format</span><span class="value">Team A vs Team B</span></div>
+                        <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
+                        <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
+                    </div>
+                    <p>Strict TDM Rules:</p>
+                    <p>1. Only M416 Allowed (No Groza, Snipers, or Shotguns).</p>
+                    <p>2. Slide must be turned OFF.</p>
+                    <p>3. No Grenades or Stun Grenades allowed.</p>
+                    <p>4. Use of prohibited items will result in immediate disqualification.</p>
+                </div>
+            </details>
+
+            <!-- FREE FIRE MAX RULES -->
+            <details class="fade-in-up delay-5">
+                <summary>Free Fire Max Battle Royale (12 Teams)</summary>
+                <div class="details-content">
+                    <p>Entry Fee: 100 INR Per Squad. Survive and conquer Bermuda. Total prize pool unlocks when 12 squads (48 players) register.</p>
+                    <div class="info-box">
+                        <div class="info-row"><span>Total Prize Pool</span><span class="value">Up to 1,000 INR</span></div>
+                        <div class="info-row"><span>1st Place (Booyah)</span><span class="value">Up to 500 INR</span></div>
+                        <div class="info-row"><span>2nd Place</span><span class="value">Up to 250 INR</span></div>
+                        <div class="info-row"><span>3rd Place</span><span class="value">Up to 150 INR</span></div>
+                        <div class="info-row"><span>Most Kills / MVP</span><span class="value">Up to 100 INR</span></div>
+                    </div>
+                    <p>Note: Prize pool adjusts based on the number of registered teams.</p>
+                </div>
+            </details>
+
+            <details class="fade-in-up delay-5">
+                <summary>Free Fire Max Clash Squad (4v4)</summary>
+                <div class="details-content">
+                    <p>Intense custom room battles. The team that reaches the target round wins first claims the prize.</p>
+                    <div class="info-box">
+                        <div class="info-row"><span>Format</span><span class="value">4v4 Clash Squad</span></div>
+                        <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
+                        <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
+                    </div>
+                    <p>Strict Free Fire Rules:</p>
+                    <p>1. Character Skills and Gun Attributes must be turned OFF.</p>
+                    <p>2. No Grenades or Flashbangs allowed (Gloo Walls permitted).</p>
+                    <p>3. Use of emulators (BlueStacks, etc.) is strictly prohibited.</p>
+                    <p>4. Hacks, glitches, or teaming up will result in an instant ban.</p>
+                </div>
+            </details>
+
+            <!-- COD MOBILE RULES -->
+            <details class="fade-in-up delay-5">
+                <summary>COD Mobile Battle Royale (25 Teams)</summary>
+                <div class="details-content">
+                    <p>Entry Fee: 100 INR Per Squad (25 INR per player). Drop into Isolated or Blackout. Total prize pool unlocks when 25 teams are registered.</p>
+                    <div class="info-box">
+                        <div class="info-row"><span>Total Prize Pool</span><span class="value">Up to 2,000 INR</span></div>
+                        <div class="info-row"><span>1st Place (40%)</span><span class="value">Up to 800 INR</span></div>
+                        <div class="info-row"><span>2nd Place (20%)</span><span class="value">Up to 400 INR</span></div>
+                        <div class="info-row"><span>3rd Place (10%)</span><span class="value">Up to 200 INR</span></div>
+                        <div class="info-row"><span>Most Kills / MVP</span><span class="value">Up to 150 INR</span></div>
+                    </div>
+                    <p>Note: Prize pool is dynamically distributed based on 80% of total collection if slots are partially filled.</p>
+                </div>
+            </details>
+
+            <details class="fade-in-up delay-5">
+                <summary>COD Mobile Multiplayer (5v5)</summary>
+                <div class="details-content">
+                    <p>Strategic 5v5 Search & Destroy (S&D) custom matches. True tactical gameplay.</p>
+                    <div class="info-box">
+                        <div class="info-row"><span>Format</span><span class="value">5v5 S&D</span></div>
+                        <div class="info-row"><span>Entry Fee</span><span class="value">100 INR Per Team</span></div>
+                        <div class="info-row"><span>Winning Prize</span><span class="value">160 INR</span></div>
+                    </div>
+                    <p>Strict COD Mobile Rules:</p>
+                    <p>1. Operator Skills and Scorestreaks are strictly prohibited.</p>
+                    <p>2. LMGs, Shotguns, and NA-45 Snipers are NOT allowed.</p>
+                    <p>3. iPads are allowed, but PC Emulators (Gameloop) are banned.</p>
+                    <p>4. All players must be ready in the lobby 10 minutes before the match time.</p>
+                </div>
+            </details>
+
+            <h2 class="fade-in-up delay-5">Frequently Asked Questions</h2>
+            <details class="fade-in-up delay-5">
+                <summary>Are emulators allowed?</summary>
+                <div class="details-content"><p>No, Emulators are strictly prohibited across all games. Only mobile devices (and iPads where specified) are allowed to maintain fair competition.</p></div>
+            </details>
+            <details class="fade-in-up delay-5">
+                <summary>How will I get Room ID and Password?</summary>
+                <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number and on our Discord server exactly 15 minutes before the match starts.</p></div>
+            </details>
+
+            <footer class="fade-in-up delay-5">
+                <div class="footer-logo">FukraGamerWorld</div>
+                <p>2026 FukraGamerWorld Esports | All Rights Reserved.</p>
+                <br>
+                <p style="text-decoration: underline;">Privacy Policy | Anti-Cheat Rules | Terms of Service</p>
+            </footer>
+        </div>
+    </div> <!-- END OF SOLID CONTENT WRAPPER -->
 
     <a href="#top" class="scroll-top">^</a>
 
@@ -418,11 +437,11 @@
             <span class="sticky-title">ESPORTS SHOWDOWN</span>
             <span class="sticky-sub">DAILY CASH TOURNAMENTS</span>
         </div>
-        <a href="register.html" class="btn-yellow">Join Now</a>
+        <a href="https://discord.gg/3JK6Su4TS" target="_blank" class="btn-yellow">Join Now</a>
     </div>
 
     <script>
-        // Trigger Modal after Preloader (at 3.5 seconds)
+        // Trigger Modal after Preloader
         setTimeout(() => {
             document.getElementById('welcomeModal').classList.add('active');
             document.body.classList.add('no-scroll');
@@ -444,35 +463,37 @@
             document.body.classList.toggle('no-scroll');
         }
 
-        // --- NEW: REFERRAL TRACKING SCRIPT ---
-        
-        // 1. Generate Fake Referral link for UI (In real site, backend provides this based on logged-in user)
+        // JS for Video Scroll Fade Effect
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.scrollY;
+            let video = document.getElementById('bgmi-video');
+            if(video) {
+                // Fades out completely by 600px scroll
+                let opacity = 1 - (scrollPosition / 600); 
+                video.style.opacity = opacity > 0 ? opacity : 0;
+            }
+        });
+
+        // --- REFERRAL TRACKING SCRIPT ---
         const myReferralCode = "FUKRA" + Math.floor(1000 + Math.random() * 9000); 
         document.getElementById("refLinkInput").value = "https://fukragamer.com/?ref=" + myReferralCode;
 
-        // 2. Track incoming clicks (Read URL for ?ref=CODE)
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const incomingRefCode = urlParams.get('ref');
             
             if (incomingRefCode) {
-                // Save it to Local Storage so the sign-up page can use it later
                 localStorage.setItem('referredBy', incomingRefCode);
                 console.log("Tracking referral code: " + incomingRefCode);
-                
-                // Optional: Show a simple alert to the new user
-                // alert("Referral applied! Sign up now to get your ₹10 Bonus.");
             }
         };
 
-        // 3. Copy Button Logic
         function copyRefLink() {
             var copyText = document.getElementById("refLinkInput");
             copyText.select();
-            copyText.setSelectionRange(0, 99999); // For mobile devices
+            copyText.setSelectionRange(0, 99999); 
             navigator.clipboard.writeText(copyText.value);
             
-            // Visual feedback (Button turns green)
             const btn = document.getElementById("copyRefBtn");
             const originalText = btn.innerText;
             btn.innerText = "Copied!";
