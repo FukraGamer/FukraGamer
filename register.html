@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | FukraGamer Esports</title>
+    <title>Register | FukraGamer.World Esports</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
@@ -47,13 +47,24 @@
         .form-control:focus { border-color: var(--accent-blue); outline: none; }
         
         .qr-box { background-color: #0a141d; padding: 20px; text-align: center; border-radius: 8px; border: 1px dashed var(--accent-green); margin: 25px 0; box-shadow: inset 0 4px 10px rgba(0,0,0,0.6); }
-        .qr-box img { max-width: 160px; margin: 10px 0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        
+        /* UPDATED RESPONSIVE QR IMAGE */
+        .qr-box img { width: 100%; max-width: 160px; height: auto; margin: 10px 0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        
         .qr-text { color: var(--accent-green); font-weight: bold; font-size: 16px; margin-bottom: 5px; text-shadow: 0 1px 3px rgba(0,231,1,0.3); }
         
         .discord-notice { background-color: rgba(20, 117, 225, 0.1); border-left: 4px solid var(--accent-blue); padding: 12px 15px; margin-bottom: 20px; font-size: 14px; border-radius: 0 6px 6px 0; }
         .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); }
         .btn-primary-large:active { transform: translateY(4px); }
         footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
+
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
+        @media (max-width: 600px) {
+            .register-section { padding: 15px; }
+            .logo-text { font-size: 20px; }
+            .header-logo { height: 35px; width: 35px; }
+            .qr-box { padding: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -61,7 +72,7 @@
     <header>
         <a href="index.html" class="brand-link">
             <img src="logo.png" alt="Logo" class="header-logo">
-            <span class="logo-text">FukraGamerWorld</span>
+            <span class="logo-text">FukraGamer.World</span>
         </a>
         <a href="index.html" class="back-btn">&larr; Back Home</a>
     </header>
@@ -124,7 +135,7 @@
         </div>
 
         <footer>
-            <p>2026 FukraGamer Esports | All Rights Reserved.</p>
+            <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
         </footer>
     </div>
 
