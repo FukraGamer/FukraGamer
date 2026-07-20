@@ -514,10 +514,13 @@
         }
         // ========================================================
 
-        // Trigger Modal after Preloader
+        // Trigger Modal after Preloader (ONLY SHOWS ONCE PER SESSION NOW)
         setTimeout(() => {
-            document.getElementById('welcomeModal').classList.add('active');
-            document.body.classList.add('no-scroll');
+            if (!sessionStorage.getItem('hasSeenPopup')) {
+                document.getElementById('welcomeModal').classList.add('active');
+                document.body.classList.add('no-scroll');
+                sessionStorage.setItem('hasSeenPopup', 'true'); // Is naal agli baar refresh te popup nahi aayega
+            }
         }, 3500);
 
         // Close Modal function
