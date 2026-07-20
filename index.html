@@ -10,22 +10,16 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LeGDV0tAAAAAE5yEr-MwylShafcy3SxnrhxZCOH"></script>
 
     <script>
-        // 1. Advanced Android WebView (App) Detection
-        const ua = navigator.userAgent || window.opera;
-        const isAppMode = ua.includes('wv') || (ua.includes('Android') && ua.includes('Version/')) || window.Android;
+        // Check if opened in App (WebView)
+        var isApp = navigator.userAgent.indexOf('wv') > -1 || navigator.userAgent.indexOf('Android') > -1 && navigator.userAgent.indexOf('Version/') > -1 || window.Android != null;
         
-        // 2. App-Only Gating: Je banda App vich hai te Logged In nahi hai, taan force Login
-        const isLoggedInAuth = localStorage.getItem('isLoggedIn') === 'true';
-        if (isAppMode && !isLoggedInAuth) {
+        // Check if user is logged in
+        var isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        // FORCE LOGIN FOR APP USERS ONLY
+        if (isApp && !isLoggedIn) {
             window.location.replace('login.html'); 
         }
-
-        // 3. Immediately add 'is-app' class for Bottom Nav CSS styling
-        document.addEventListener('DOMContentLoaded', () => {
-            if (isAppMode) {
-                document.body.classList.add('is-app');
-            }
-        });
     </script>
 
     <style>
@@ -163,8 +157,8 @@
         .scroll-top { position: fixed; bottom: 85px; right: 15px; width: 45px; height: 45px; background-color: var(--accent-green); color: #000; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold; text-decoration: none; z-index: 999; box-shadow: 0 6px 15px rgba(0,231,1,0.4), inset 0 1px 1px rgba(255,255,255,0.5); transition: 0.3s; }
         .scroll-top:active { transform: translateY(4px); box-shadow: 0 2px 5px rgba(0,231,1,0.4); }
         
-        /* --- WEB STICKY BOTTOM --- */
-        .sticky-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #1a2c38; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); z-index: 1000; box-shadow: 0 -8px 25px rgba(0,0,0,0.6); }
+        /* --- STICKY BOTTOM FOR WEB ONLY --- */
+        .sticky-bottom { display: flex; justify-content: space-between; align-items: center; position: fixed; bottom: 0; left: 0; width: 100%; background-color: #1a2c38; padding: 12px 15px; border-top: 1px solid rgba(255,255,255,0.05); z-index: 1000; box-shadow: 0 -8px 25px rgba(0,0,0,0.6); }
         .sticky-text { display: flex; flex-direction: column; }
         .sticky-title { font-weight: 700; font-size: 13px; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
         .sticky-sub { color: var(--accent-green); font-size: 12px; font-weight: 700; }
@@ -174,8 +168,9 @@
         .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
 
         /* ======================================================== */
-        /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
+        /* --- APP SPECIFIC UI STYLES --- */
         /* ======================================================== */
+        /* Hide Bottom Nav by default on Website */
         .bottom-nav {
             display: none; position: fixed; bottom: 0; left: 0; width: 100%;
             background-color: var(--bg-header); justify-content: space-around;
@@ -185,15 +180,24 @@
         .nav-item.active { color: var(--accent-yellow); transform: translateY(-2px); }
         .nav-item .icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
 
+        /* When 'is-app' class is active (Mobile App): */
         body.is-app { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; padding-bottom: 80px; }
         body.is-app::-webkit-scrollbar { display: none; }
+        
+        /* HIDE Website Sticky Bottom in App */
         body.is-app .sticky-bottom { display: none !important; }
-        body.is-app .bottom-nav { display: flex; }
+        
+        /* SHOW App Bottom Nav in App */
+        body.is-app .bottom-nav { display: flex !important; }
         /* ======================================================== */
 
     </style>
 </head>
 <body id="top">
+
+    <script>
+        if (isApp) { document.body.classList.add('is-app'); }
+    </script>
 
     <div class="preloader" id="preloader">
         <div class="preloader-container">
@@ -531,7 +535,7 @@
         }
 
         // ========================================================
-        // Trigger Modal after Preloader
+        
         setTimeout(() => {
             if (!sessionStorage.getItem('hasSeenPopup')) {
                 document.getElementById('welcomeModal').classList.add('active');
