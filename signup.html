@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | FukraGamer.World</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- FIREBASE APP SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+        // --- APNE FIREBASE CONSOLE TON CONFIG ITHE PASTE KARO ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <style>
+        /* --- CORE COLORS & STYLES --- */
+        :root {
+            --bg-body: #0a141d;
+            --bg-card: #1a2c38;
+            --bg-header: #0f212e;
+            --text-main: #ffffff;
+            --text-muted: #b1bad3;
+            --accent-blue: #1475e1;
+            --accent-green: #00e701;
+            --accent-yellow: #fdda10;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 30px; }
+
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.1s; }
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* --- HEADER --- */
+        header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10000; border-bottom: 1px solid #2a3d4a; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent-yellow); box-shadow: 0 0 10px rgba(253,218,16,0.4); }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -0.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .back-btn { background: none; border: none; color: var(--text-main); font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.2s; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; margin-top: 40px; }
+
+        .login-section { background-color: var(--bg-card); border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #2a3d4a; box-shadow: 0 8px 25px rgba(0,0,0,0.6); }
+        .login-section h2 { color: #fff; margin-bottom: 5px; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); text-align: center; }
+        .login-section .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; line-height: 1.5; text-align: center; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
+        .form-control { width: 100%; padding: 12px 15px; background-color: #0a141d; border: 1px solid #2a3d4a; border-radius: 6px; color: #fff; font-size: 15px; transition: 0.3s; font-family: 'Roboto', sans-serif; box-shadow: inset 0 3px 6px rgba(0,0,0,0.6); }
+        .form-control:focus { border-color: var(--accent-blue); outline: none; }
+        
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: 13px; color: var(--text-muted); }
+        .checkbox-group input { accent-color: var(--accent-blue); width: 16px; height: 16px; cursor: pointer; }
+        .checkbox-group a { color: var(--accent-blue); text-decoration: none; }
+
+        .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); margin-top: 15px; }
+        .btn-primary-large:active { transform: translateY(4px); }
+
+        /* --- SOCIAL LOGIN DIVIDER & BUTTONS --- */
+        .divider { display: flex; align-items: center; margin: 25px 0; color: var(--text-muted); font-size: 14px; }
+        .divider::before, .divider::after { content: ""; flex: 1; border-bottom: 1px solid #2a3d4a; margin: 0 15px; }
+        
+        .social-login-grid { display: flex; gap: 15px; }
+        .btn-social { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background-color: #253645; color: #fff; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s; border: 1px solid #304555; box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: pointer; }
+        .btn-social:hover { background-color: #304555; transform: translateY(-2px); }
+        .btn-social svg { width: 20px; height: 20px; }
+
+        .auth-links { text-align: center; margin-top: 25px; font-size: 14px; color: var(--text-muted); }
+        .auth-links a { color: var(--accent-blue); text-decoration: none; font-weight: bold; }
+        .auth-links a:hover { text-decoration: underline; }
+
+        footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
+
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
+        @media (max-width: 600px) {
+            .login-section { padding: 15px; }
+            .logo-text { font-size: 20px; }
+            .header-logo { height: 35px; width: 35px; }
+        }
+
+        /* ======================================================== */
+        /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
+        /* ======================================================== */
+        .bottom-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--bg-header); justify-content: space-around;
+            padding: 10px 0 15px 0; border-top: 1px solid #2a3d4a; z-index: 1000; box-shadow: 0 -8px 20px rgba(0,0,0,0.7);
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 700; gap: 4px; transition: 0.2s ease; }
+        .nav-item.active { color: var(--accent-yellow); transform: translateY(-2px); }
+        .nav-item .icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+
+        body.is-app { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; padding-bottom: 80px; }
+        body.is-app::-webkit-scrollbar { display: none; }
+        body.is-app .bottom-nav { display: flex; }
+        /* ======================================================== */
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand-link">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span class="logo-text">FukraGamer</span>
+        </a>
+        <a href="index.html" class="back-btn">&larr; Back Home</a>
+    </header>
+
+    <div class="container fade-in-up">
+        <div class="login-section">
+            <h2>Create an Account</h2>
+            <p class="subtitle">Join FukraGamer.World and start competing today.</p>
+
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" class="form-control" placeholder="Create a password (min 6 chars)" required>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termsCheck" required>
+                    <label for="termsCheck" style="margin-bottom:0; color: var(--text-muted); cursor: pointer;">I am 18 or older and agree to <a href="privacy-policy.html" target="_blank">Terms & Conditions</a></label>
+                </div>
+
+                <button type="submit" class="btn-primary-large">Register</button>
+            </form>
+
+            <!-- SOCIAL LOGIN SECTION -->
+            <div class="divider">Or continue with</div>
+            
+            <div class="social-login-grid">
+                <!-- Google Firebase Signup Button -->
+                <div class="btn-social" onclick="loginWithGoogle()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Google
+                </div>
+
+                <!-- Facebook Firebase Signup Button -->
+                <div class="btn-social" onclick="loginWithFacebook()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/>
+                        <path d="M16.671 15.542l.532-3.469h-3.328v-2.25c0-.949.465-1.874 1.956-1.874h1.514V5.002s-1.374-.235-2.686-.235c-2.741 0-4.533 1.662-4.533 4.669v2.637H7.078v3.469h3.048v8.385a12.19 12.19 0 003.75 0v-8.385h2.795z" fill="#ffffff"/>
+                    </svg>
+                    Facebook
+                </div>
+            </div>
+
+            <div class="auth-links">
+                Already have an account? <a href="login.html">Log in</a>
+            </div>
+        </div>
+
+        <!-- GOOGLE PLAY STORE COMPLIANCE DISCLAIMER -->
+        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin: 15px auto; max-width: 600px; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: justify;">
+            <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are strictly skills-based eSports competitions.
+        </div>
+
+        <footer>
+            <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+        </a>
+        <a href="register.html" class="nav-item">
+            <span class="icon">🎮</span>
+            <span class="text">Play</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <span class="icon">🏆</span>
+            <span class="text">Ranks</span>
+        </a>
+        <a href="login.html" class="nav-item active">
+            <span class="icon">👤</span>
+            <span class="text">Profile</span>
+        </a>
+    </div>
+
+    <script>
+        // --- DETECT ANDROID APP (WEBVIEW) MAGIC SCRIPT ---
+        const isApp = navigator.userAgent.includes('wv') || window.Android;
+        if (isApp) { document.body.classList.add('is-app'); }
+
+        // --- FIREBASE EMAIL/PASSWORD SIGNUP ---
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("Account Created Successfully!");
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Error: " + error.message);
+                });
+        });
+
+        // --- FIREBASE GOOGLE LOGIN/SIGNUP ---
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Google Sign-Up Error: " + error.message);
+                });
+        }
+
+        // --- FIREBASE FACEBOOK LOGIN/SIGNUP ---
+        function loginWithFacebook() {
+            const provider = new firebase.auth.FacebookAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Facebook Sign-Up Error: " + error.message);
+                });
+        }
+    </script>
+</body>
+</html>
