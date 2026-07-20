@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard | FukraGamer.World</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CORE COLORS & STYLES --- */
+        :root {
+            --bg-body: #0a141d;
+            --bg-card: #1a2c38;
+            --bg-header: #0f212e;
+            --text-main: #ffffff;
+            --text-muted: #b1bad3;
+            --accent-blue: #1475e1;
+            --accent-green: #00e701;
+            --accent-yellow: #fdda10;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 30px; }
+
+        /* --- ON-LOAD ANIMATIONS --- */
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.1s; }
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* --- HEADER --- */
+        header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10000; border-bottom: 1px solid #2a3d4a; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent-yellow); box-shadow: 0 0 10px rgba(253,218,16,0.4); }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -0.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .back-btn { background: none; border: none; color: var(--text-main); font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.2s; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        
+        .container { padding: 15px; max-width: 800px; margin: 0 auto; margin-top: 20px; }
+
+        .leaderboard-section { background-color: var(--bg-card); border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #2a3d4a; box-shadow: 0 8px 25px rgba(0,0,0,0.6); }
+        .leaderboard-section h2 { color: var(--accent-yellow); margin-bottom: 5px; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; text-transform: uppercase; }
+        .leaderboard-section .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
+        
+        /* RANK CARDS */
+        .rank-card { display: flex; align-items: center; justify-content: space-between; background-color: #0a141d; padding: 15px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #2a3d4a; transition: 0.3s; }
+        .rank-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
+        .rank-left { display: flex; align-items: center; gap: 15px; }
+        .rank-number { font-size: 20px; font-weight: 900; color: var(--text-muted); width: 30px; text-align: center; }
+        .team-name { font-size: 16px; font-weight: 700; color: #fff; }
+        .fp-score { font-size: 16px; font-weight: 900; color: var(--accent-green); text-shadow: 0 1px 3px rgba(0,231,1,0.3); }
+        
+        /* TOP 3 HIGHLIGHTS */
+        .rank-1 { border-color: var(--accent-yellow); box-shadow: inset 0 0 10px rgba(253,218,16,0.1); }
+        .rank-1 .rank-number { color: var(--accent-yellow); text-shadow: 0 0 8px rgba(253,218,16,0.6); }
+        .rank-2 { border-color: #c0c0c0; box-shadow: inset 0 0 10px rgba(192,192,192,0.1); }
+        .rank-2 .rank-number { color: #c0c0c0; }
+        .rank-3 { border-color: #cd7f32; box-shadow: inset 0 0 10px rgba(205,127,50,0.1); }
+        .rank-3 .rank-number { color: #cd7f32; }
+
+        footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
+
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
+        @media (max-width: 600px) {
+            .leaderboard-section { padding: 15px; }
+            .logo-text { font-size: 20px; }
+            .header-logo { height: 35px; width: 35px; }
+        }
+
+        /* ======================================================== */
+        /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
+        /* ======================================================== */
+        .bottom-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--bg-header); justify-content: space-around;
+            padding: 10px 0 15px 0; border-top: 1px solid #2a3d4a; z-index: 1000; box-shadow: 0 -8px 20px rgba(0,0,0,0.7);
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 700; gap: 4px; transition: 0.2s ease; }
+        .nav-item.active { color: var(--accent-yellow); transform: translateY(-2px); }
+        .nav-item .icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+
+        body.is-app { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; padding-bottom: 80px; }
+        body.is-app::-webkit-scrollbar { display: none; }
+        body.is-app .bottom-nav { display: flex; }
+        /* ======================================================== */
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand-link">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span class="logo-text">FukraGamer.World</span>
+        </a>
+        <a href="index.html" class="back-btn">&larr; Back Home</a>
+    </header>
+
+    <div class="container fade-in-up">
+        <div class="leaderboard-section">
+            <h2>🏆 Top Squads</h2>
+            <p class="subtitle">Dominate the arena. The teams with the highest Fukra Points (FP).</p>
+
+            <div class="rank-card rank-1">
+                <div class="rank-left">
+                    <span class="rank-number">1</span>
+                    <span class="team-name">Fukra Esports</span>
+                </div>
+                <span class="fp-score">15,420 FP</span>
+            </div>
+
+            <div class="rank-card rank-2">
+                <div class="rank-left">
+                    <span class="rank-number">2</span>
+                    <span class="team-name">Team SoulX</span>
+                </div>
+                <span class="fp-score">12,100 FP</span>
+            </div>
+
+            <div class="rank-card rank-3">
+                <div class="rank-left">
+                    <span class="rank-number">3</span>
+                    <span class="team-name">GodL Assassins</span>
+                </div>
+                <span class="fp-score">9,850 FP</span>
+            </div>
+
+            <div class="rank-card">
+                <div class="rank-left">
+                    <span class="rank-number">4</span>
+                    <span class="team-name">PBX Gaming</span>
+                </div>
+                <span class="fp-score">7,200 FP</span>
+            </div>
+            
+            <div class="rank-card">
+                <div class="rank-left">
+                    <span class="rank-number">5</span>
+                    <span class="team-name">Mavi Strikers</span>
+                </div>
+                <span class="fp-score">6,900 FP</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+        </a>
+        <a href="register.html" class="nav-item">
+            <span class="icon">🎮</span>
+            <span class="text">Play</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item active"> <!-- Ranks is ACTIVE -->
+            <span class="icon">🏆</span>
+            <span class="text">Ranks</span>
+        </a>
+        <a href="login.html" class="nav-item">
+            <span class="icon">👤</span>
+            <span class="text">Profile</span>
+        </a>
+    </div>
+
+    <script>
+        // --- DETECT ANDROID APP (WEBVIEW) MAGIC SCRIPT ---
+        const isApp = navigator.userAgent.includes('wv') || window.Android;
+        if (isApp) { document.body.classList.add('is-app'); }
+    </script>
+</body>
+</html>
