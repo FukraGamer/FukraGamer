@@ -220,7 +220,7 @@
                 });
         });
 
-        // --- FIREBASE GOOGLE LOGIN/SIGNUP (Redirect Strategy for WebView) ---
+        // --- FIREBASE GOOGLE LOGIN/SIGNUP (Redirect Strategy) ---
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider);
