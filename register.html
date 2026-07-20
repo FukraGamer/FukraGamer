@@ -57,6 +57,45 @@
             .logo-text { font-size: 20px; }
             .header-logo { height: 35px; width: 35px; }
         }
+
+        /* ======================================================== */
+        /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
+        /* ======================================================== */
+        .bottom-nav {
+            display: none; /* Web te hidden rahegi */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-header);
+            justify-content: space-around;
+            padding: 10px 0 15px 0;
+            border-top: 1px solid #2a3d4a;
+            z-index: 1000;
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.7);
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; text-decoration: none;
+            color: var(--text-muted); font-size: 11px; font-weight: 700; gap: 4px; transition: 0.2s ease;
+        }
+        .nav-item.active { color: var(--accent-yellow); transform: translateY(-2px); }
+        .nav-item .icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+
+        /* --- NATIVE APP MODE CSS (Jadon JavaScript 'is-app' class lagayegi) --- */
+        body.is-app {
+            -webkit-user-select: none; /* Text copy band */
+            user-select: none;
+            -webkit-tap-highlight-color: transparent; /* Blue click tap band */
+            overscroll-behavior-y: none; /* Scroll bounce band */
+            padding-bottom: 80px; /* Thalle jagah bottom nav layi */
+        }
+        body.is-app::-webkit-scrollbar {
+            display: none; /* App vich scrollbar hide karo */
+        }
+        body.is-app .bottom-nav {
+            display: flex; /* Asli App wala bottom bar show karo */
+        }
+        /* ======================================================== */
     </style>
 </head>
 <body>
@@ -126,41 +165,70 @@
         </footer>
     </div>
 
+    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+        </a>
+        <a href="register.html" class="nav-item active"> <!-- Eh ACTIVE hai kyunki eh Register/Play page hai -->
+            <span class="icon">🎮</span>
+            <span class="text">Play</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="icon">🏆</span>
+            <span class="text">Ranks</span>
+        </a>
+        <a href="login.html" class="nav-item">
+            <span class="icon">👤</span>
+            <span class="text">Profile</span>
+        </a>
+    </div>
+
     <script>
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
+        // ========================================================
+        // --- DETECT ANDROID APP (WEBVIEW) MAGIC SCRIPT ---
+        // ========================================================
+        const isApp = navigator.userAgent.includes('wv') || window.Android;
+        if (isApp) {
+            document.body.classList.add('is-app');
+        }
+        // ========================================================
 
-        const selectedTournament = document.getElementById('tournamentSelect').value;
-        const teamName = document.getElementById('teamName').value;
-        const player1 = document.getElementById('player1').value;
-        const player2 = document.getElementById('player2').value;
-        const player3 = document.getElementById('player3').value;
-        const player4 = document.getElementById('player4').value;
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
 
-        const webhookURL = "https://discord.com/api/webhooks/1527673758494494871/ZNCbZOemk3FDrrZCWFfjMrtJGWufCdd9vPDIZ_DdcJudF8Zk5D_V28YRutPCqmdoZhkv"; 
+            const selectedTournament = document.getElementById('tournamentSelect').value;
+            const teamName = document.getElementById('teamName').value;
+            const player1 = document.getElementById('player1').value;
+            const player2 = document.getElementById('player2').value;
+            const player3 = document.getElementById('player3').value;
+            const player4 = document.getElementById('player4').value;
 
-        const message = {
-            content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Tournament:** ${selectedTournament}\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for FP verification in ticket.*`
-        };
+            const webhookURL = "https://discord.com/api/webhooks/1527673758494494871/ZNCbZOemk3FDrrZCWFfjMrtJGWufCdd9vPDIZ_DdcJudF8Zk5D_V28YRutPCqmdoZhkv"; 
 
-        const submitBtn = document.querySelector('button[type="submit"]');
-        submitBtn.innerText = "Redirecting to Discord...";
-        submitBtn.disabled = true;
+            const message = {
+                content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Tournament:** ${selectedTournament}\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for FP verification in ticket.*`
+            };
 
-        fetch(webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(message)
-        })
-        .then(response => {
-            window.location.href = "https://discord.gg/uvYfD4smh5"; 
-        })
-        .catch(error => {
-            alert("Error submitting. Please try again.");
-            submitBtn.innerText = "Submit Registration";
-            submitBtn.disabled = false;
+            const submitBtn = document.querySelector('button[type="submit"]');
+            submitBtn.innerText = "Redirecting to Discord...";
+            submitBtn.disabled = true;
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                window.location.href = "https://discord.gg/uvYfD4smh5"; 
+            })
+            .catch(error => {
+                alert("Error submitting. Please try again.");
+                submitBtn.innerText = "Submit Registration";
+                submitBtn.disabled = false;
+            });
         });
-    });
     </script>
 </body>
 </html>
