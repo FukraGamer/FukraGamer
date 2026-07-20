@@ -7,7 +7,6 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
-    <!-- AUTH CHECK: App vich bina login nahi khulegi -->
     <script>
         const isAppAuth = navigator.userAgent.includes('wv') || window.Android;
         const isLoggedInAuth = localStorage.getItem('isLoggedIn') === 'true';
@@ -116,7 +115,7 @@
         .btn-top { flex: 1; padding: 12px; border-radius: 6px; text-align: center; font-weight: 700; text-decoration: none; font-size: 15px; }
         .btn-dark { background-color: #213743; color: #fff; border: 1px solid #1a2a33; }
         .btn-blue { background-color: var(--accent-blue); color: #fff; }
-        .btn-logout { background-color: #ff4757; color: #fff; width: 100%; display: none; } /* Hidden by default */
+        .btn-logout { background-color: #ff4757; color: #fff; width: 100%; display: none; } 
         
         .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; margin-bottom: 25px; }
 
@@ -182,7 +181,7 @@
 </head>
 <body id="top">
 
-    <div class="preloader">
+    <div class="preloader" id="preloader">
         <div class="preloader-container">
             <span class="star star-1">✦</span>
             <span class="star star-2">✦</span>
@@ -191,7 +190,18 @@
         </div>
     </div>
 
-    <!-- WELCOME MODAL HOOK -->
+    <script>
+        if (sessionStorage.getItem('hasSeenPreloader')) {
+            document.getElementById('preloader').style.display = 'none';
+            // Disable animation delays so content loads instantly
+            let style = document.createElement('style');
+            style.innerHTML = '.delay-1, .delay-2, .delay-3, .delay-4, .delay-5 { animation-delay: 0s !important; } .header-logo { animation: none !important; opacity: 1 !important; }';
+            document.head.appendChild(style);
+        } else {
+            sessionStorage.setItem('hasSeenPreloader', 'true');
+        }
+    </script>
+
     <div class="welcome-modal" id="welcomeModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
@@ -216,7 +226,6 @@
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
     <div class="mobile-menu" id="mobileMenu">
         
-        <!-- DYNAMIC MENU BUTTONS: Log In/Sign Up or Log Out -->
         <div class="menu-top-buttons" id="authMenuButtons">
             <a href="signup.html" class="btn-top btn-dark" id="btnSignUp">Sign Up</a>
             <a href="login.html" class="btn-top btn-blue" id="btnLogIn">Log In</a>
@@ -265,7 +274,6 @@
         </details>
     </div>
 
-    <!-- NEW VIDEO HERO SECTION -->
     <div class="video-hero">
         <video autoplay muted loop playsinline id="bgmi-video">
             <source src="tuhadi-video-da-link.mp4" type="video/mp4"> 
@@ -279,7 +287,6 @@
         </div>
     </div>
 
-    <!-- MAIN CONTENT SCROLL WRAPPER -->
     <div class="solid-content-wrapper">
         <div class="container main-content">
             
@@ -290,7 +297,6 @@
 
             <h2 class="fade-in-up delay-4">Active Tournaments</h2>
             <div class="grid-2col fade-in-up delay-4">
-                <!-- BGMI CARDS -->
                 <div class="game-card">
                     <img src="classic.png" alt="BGMI Classic">
                     <div class="content">
@@ -306,7 +312,6 @@
                     </div>
                 </div>
                 
-                <!-- FREE FIRE CARDS -->
                 <div class="game-card">
                     <img src="freefire.png" alt="Free Fire Classic">
                     <div class="content">
@@ -322,7 +327,6 @@
                     </div>
                 </div>
 
-                <!-- COD MOBILE CARDS -->
                 <div class="game-card">
                     <img src="cod.png" alt="COD Mobile Battle Royale">
                     <div class="content">
@@ -341,7 +345,6 @@
 
             <h2 class="fade-in-up delay-5">Rules & FP Distribution</h2>
             
-            <!-- BGMI RULES -->
             <details class="fade-in-up delay-5">
                 <summary>BGMI Classic Mega Matches (25 Teams)</summary>
                 <div class="details-content">
@@ -374,7 +377,6 @@
                 </div>
             </details>
 
-            <!-- FREE FIRE MAX RULES -->
             <details class="fade-in-up delay-5">
                 <summary>Free Fire Max Battle Royale (12 Teams)</summary>
                 <div class="details-content">
@@ -407,7 +409,6 @@
                 </div>
             </details>
 
-            <!-- COD MOBILE RULES -->
             <details class="fade-in-up delay-5">
                 <summary>COD Mobile Battle Royale (25 Teams)</summary>
                 <div class="details-content">
@@ -454,7 +455,6 @@
                 <div class="footer-logo">FukraGamer.World</div>
                 <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
                 
-                <!-- GOOGLE PLAY STORE COMPLIANCE DISCLAIMER -->
                 <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin: 15px auto; max-width: 600px; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: justify;">
                     <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are strictly skills-based eSports competitions.
                 </div>
@@ -467,11 +467,8 @@
                 </p>
             </footer>
         </div>
-    </div> <!-- END OF SOLID CONTENT WRAPPER -->
+    </div> <a href="#top" class="scroll-top">^</a>
 
-    <a href="#top" class="scroll-top">^</a>
-
-    <!-- WEB STICKY BOTTOM (Hidden in App) -->
     <div class="sticky-bottom">
         <div class="sticky-text">
             <span class="sticky-title">ESPORTS SHOWDOWN</span>
@@ -480,7 +477,6 @@
         <a href="register.html" class="btn-yellow">Join Now</a>
     </div>
 
-    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
     <div class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <span class="icon">🏠</span>
