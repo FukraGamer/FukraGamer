@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | FukraGamer.World</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CORE COLORS & STYLES --- */
+        :root {
+            --bg-body: #0a141d;
+            --bg-card: #1a2c38;
+            --bg-header: #0f212e;
+            --text-main: #ffffff;
+            --text-muted: #b1bad3;
+            --accent-blue: #1475e1;
+            --accent-green: #00e701;
+            --accent-yellow: #fdda10;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 30px; }
+
+        /* --- ON-LOAD ANIMATIONS --- */
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.1s; }
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* --- HEADER --- */
+        header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10000; border-bottom: 1px solid #2a3d4a; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent-yellow); box-shadow: 0 0 10px rgba(253,218,16,0.4); }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -0.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .back-btn { background: none; border: none; color: var(--text-main); font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.2s; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; margin-top: 40px; }
+
+        .login-section { background-color: var(--bg-card); border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #2a3d4a; box-shadow: 0 8px 25px rgba(0,0,0,0.6); }
+        .login-section h2 { color: #fff; margin-bottom: 5px; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); text-align: center; }
+        .login-section .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; line-height: 1.5; text-align: center; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
+        .form-control { width: 100%; padding: 12px 15px; background-color: #0a141d; border: 1px solid #2a3d4a; border-radius: 6px; color: #fff; font-size: 15px; transition: 0.3s; font-family: 'Roboto', sans-serif; box-shadow: inset 0 3px 6px rgba(0,0,0,0.6); }
+        .form-control:focus { border-color: var(--accent-blue); outline: none; }
+        
+        .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); margin-top: 25px; }
+        .btn-primary-large:active { transform: translateY(4px); }
+
+        .auth-links { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); }
+        .auth-links a { color: var(--accent-blue); text-decoration: none; font-weight: bold; }
+        .auth-links a:hover { text-decoration: underline; }
+
+        footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
+
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
+        @media (max-width: 600px) {
+            .login-section { padding: 15px; }
+            .logo-text { font-size: 20px; }
+            .header-logo { height: 35px; width: 35px; }
+        }
+
+        /* ======================================================== */
+        /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
+        /* ======================================================== */
+        .bottom-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--bg-header); justify-content: space-around;
+            padding: 10px 0 15px 0; border-top: 1px solid #2a3d4a; z-index: 1000; box-shadow: 0 -8px 20px rgba(0,0,0,0.7);
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 700; gap: 4px; transition: 0.2s ease; }
+        .nav-item.active { color: var(--accent-yellow); transform: translateY(-2px); }
+        .nav-item .icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+
+        body.is-app { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; padding-bottom: 80px; }
+        body.is-app::-webkit-scrollbar { display: none; }
+        body.is-app .bottom-nav { display: flex; }
+        /* ======================================================== */
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand-link">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span class="logo-text">FukraGamer</span>
+        </a>
+        <a href="index.html" class="back-btn">&larr; Back Home</a>
+    </header>
+
+    <div class="container fade-in-up">
+        <div class="login-section">
+            <h2>Player Login</h2>
+            <p class="subtitle">Access your dashboard, FP balance, and match history.</p>
+
+            <form action="#">
+                <div class="form-group">
+                    <label>Email or Username</label>
+                    <input type="text" class="form-control" placeholder="Enter your email or IGN" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+
+                <button type="button" class="btn-primary-large" onclick="alert('Dashboard coming soon!')">Login to Dashboard</button>
+            </form>
+
+            <div class="auth-links">
+                Don't have an account? <a href="#">Sign up here</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+        </a>
+        <a href="register.html" class="nav-item">
+            <span class="icon">🎮</span>
+            <span class="text">Play</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <span class="icon">🏆</span>
+            <span class="text">Ranks</span>
+        </a>
+        <a href="login.html" class="nav-item active"> <!-- Profile is ACTIVE -->
+            <span class="icon">👤</span>
+            <span class="text">Profile</span>
+        </a>
+    </div>
+
+    <script>
+        // --- DETECT ANDROID APP (WEBVIEW) MAGIC SCRIPT ---
+        const isApp = navigator.userAgent.includes('wv') || window.Android;
+        if (isApp) { document.body.classList.add('is-app'); }
+    </script>
+</body>
+</html>
