@@ -57,7 +57,9 @@
         .rank-3 { border-color: #cd7f32; box-shadow: inset 0 0 10px rgba(205,127,50,0.1); }
         .rank-3 .rank-number { color: #cd7f32; }
 
+        /* FOOTER & COMPLIANCE */
         footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
+        .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
 
         /* --- MOBILE RESPONSIVE TWEAKS --- */
         @media (max-width: 600px) {
@@ -140,8 +142,20 @@
             </div>
         </div>
 
-        <footer>
+        <footer class="fade-in-up" style="animation-delay: 0.2s;">
+            <div class="footer-logo">FukraGamer.World</div>
             <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
+            
+            <!-- GOOGLE PLAY STORE COMPLIANCE DISCLAIMER -->
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: justify;">
+                <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are skills-based eSports competitions. Users must be 18 years or older to participate.
+            </div>
+
+            <p style="margin-top: 15px;">
+                <a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Privacy Policy</a> | 
+                <a href="terms.html" style="color: var(--text-muted); text-decoration: underline;">Terms of Service</a> | 
+                <a href="contact.html" style="color: var(--text-muted); text-decoration: underline;">Contact Us</a>
+            </p>
         </footer>
     </div>
 
