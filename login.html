@@ -7,6 +7,34 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
+    <!-- FIREBASE APP SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+        // --- 1. APNE FIREBASE CONSOLE TON CONFIG ITHE PASTE KARO ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // --- 2. AUTH STATE GATING (App te Web Vich Check) ---
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User logged in hai, je oh login page te hai taan index te bhej do
+                const isApp = navigator.userAgent.includes('wv') || window.Android;
+                if (isApp && window.location.pathname.includes('login.html')) {
+                    // window.location.href = 'index.html'; 
+                }
+            }
+        });
+    </script>
+
     <style>
         /* --- CORE COLORS & STYLES --- */
         :root {
@@ -24,7 +52,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 30px; }
 
-        /* --- ON-LOAD ANIMATIONS --- */
         .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.1s; }
         @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 
@@ -54,9 +81,8 @@
         .divider::before, .divider::after { content: ""; flex: 1; border-bottom: 1px solid #2a3d4a; margin: 0 15px; }
         
         .social-login-grid { display: flex; gap: 15px; }
-        .btn-social { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background-color: #253645; color: #fff; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s; border: 1px solid #304555; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .btn-social { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background-color: #253645; color: #fff; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s; border: 1px solid #304555; box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: pointer; }
         .btn-social:hover { background-color: #304555; transform: translateY(-2px); }
-        .btn-social:active { transform: translateY(2px); box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
         .btn-social svg { width: 20px; height: 20px; }
 
         .auth-links { text-align: center; margin-top: 25px; font-size: 14px; color: var(--text-muted); }
@@ -95,7 +121,7 @@
     <header>
         <a href="index.html" class="brand-link">
             <img src="logo.png" alt="Logo" class="header-logo">
-            <span class="logo-text">FukraGamer</span>
+            <span class="logo-text">FukraGamer.World</span>
         </a>
         <a href="index.html" class="back-btn">&larr; Back Home</a>
     </header>
@@ -105,26 +131,26 @@
             <h2>Player Login</h2>
             <p class="subtitle">Access your dashboard, FP balance, and match history.</p>
 
-            <form action="#">
+            <form id="emailLoginForm">
                 <div class="form-group">
-                    <label>Email or Username</label>
-                    <input type="text" class="form-control" placeholder="Enter your email or IGN" required>
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
                 </div>
 
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Enter your password" required>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
                 </div>
 
-                <button type="button" class="btn-primary-large" onclick="alert('Dashboard coming soon!')">Login</button>
+                <button type="submit" class="btn-primary-large">Login</button>
             </form>
 
             <!-- SOCIAL LOGIN SECTION -->
             <div class="divider">Or continue with</div>
             
             <div class="social-login-grid">
-                <!-- Google Button -->
-                <a href="#" class="btn-social">
+                <!-- Google Firebase Login Button -->
+                <div class="btn-social" onclick="loginWithGoogle()">
                     <svg viewBox="0 0 24 24">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                         <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -132,20 +158,20 @@
                         <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                     </svg>
                     Google
-                </a>
+                </div>
 
-                <!-- Facebook Button -->
-                <a href="#" class="btn-social">
+                <!-- Facebook Firebase Login Button -->
+                <div class="btn-social" onclick="loginWithFacebook()">
                     <svg viewBox="0 0 24 24">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/>
                         <path d="M16.671 15.542l.532-3.469h-3.328v-2.25c0-.949.465-1.874 1.956-1.874h1.514V5.002s-1.374-.235-2.686-.235c-2.741 0-4.533 1.662-4.533 4.669v2.637H7.078v3.469h3.048v8.385a12.19 12.19 0 003.75 0v-8.385h2.795z" fill="#ffffff"/>
                     </svg>
                     Facebook
-                </a>
+                </div>
             </div>
 
             <div class="auth-links">
-               Don’t have an account? <a href="#">sign up</a> <!-- Changed from Sign Up to Log in according to screenshot -->
+                Don't have an account? <a href="#">Sign up</a>
             </div>
         </div>
 
@@ -173,7 +199,7 @@
             <span class="icon">🏆</span>
             <span class="text">Ranks</span>
         </a>
-        <a href="login.html" class="nav-item active"> <!-- Profile is ACTIVE -->
+        <a href="login.html" class="nav-item active">
             <span class="icon">👤</span>
             <span class="text">Profile</span>
         </a>
@@ -183,6 +209,46 @@
         // --- DETECT ANDROID APP (WEBVIEW) MAGIC SCRIPT ---
         const isApp = navigator.userAgent.includes('wv') || window.Android;
         if (isApp) { document.body.classList.add('is-app'); }
+
+        // --- FIREBASE EMAIL/PASSWORD LOGIN ---
+        document.getElementById('emailLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("Login Successful!");
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Error: " + error.message);
+                });
+        });
+
+        // --- FIREBASE GOOGLE LOGIN ---
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Google Login Error: " + error.message);
+                });
+        }
+
+        // --- FIREBASE FACEBOOK LOGIN ---
+        function loginWithFacebook() {
+            const provider = new firebase.auth.FacebookAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Facebook Login Error: " + error.message);
+                });
+        }
     </script>
 </body>
 </html>
