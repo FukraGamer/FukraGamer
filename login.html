@@ -7,7 +7,6 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
-    <!-- FIREBASE APP SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
@@ -22,18 +21,12 @@
             appId: "1:691754202599:web:b399b4448a0d8a36ae7942",
             measurementId: "G-LBX2CKDNX9"
         };
-        firebase.initializeApp(firebaseConfig);
-
-        // --- 2. AUTH STATE GATING (App te Web Vich Check) ---
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User logged in hai, je oh login page te hai taan index te bhej do
-                const isApp = navigator.userAgent.includes('wv') || window.Android;
-                if (window.location.pathname.includes('login.html')) {
-                    window.location.href = 'index.html'; 
-                }
-            }
-        });
+        // Error ton bachan layi Try-Catch laya hai
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch(e) {
+            console.log("Firebase setup pending...");
+        }
     </script>
 
     <style>
@@ -92,16 +85,7 @@
 
         footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
 
-        /* --- MOBILE RESPONSIVE TWEAKS --- */
-        @media (max-width: 600px) {
-            .login-section { padding: 15px; }
-            .logo-text { font-size: 20px; }
-            .header-logo { height: 35px; width: 35px; }
-        }
-
-        /* ======================================================== */
         /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
-        /* ======================================================== */
         .bottom-nav {
             display: none; position: fixed; bottom: 0; left: 0; width: 100%;
             background-color: var(--bg-header); justify-content: space-around;
@@ -114,7 +98,6 @@
         body.is-app { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; padding-bottom: 80px; }
         body.is-app::-webkit-scrollbar { display: none; }
         body.is-app .bottom-nav { display: flex; }
-        /* ======================================================== */
     </style>
 </head>
 <body>
@@ -146,11 +129,9 @@
                 <button type="submit" class="btn-primary-large">Login</button>
             </form>
 
-            <!-- SOCIAL LOGIN SECTION -->
             <div class="divider">Or continue with</div>
             
             <div class="social-login-grid">
-                <!-- Google Firebase Login Button -->
                 <div class="btn-social" onclick="loginWithGoogle()">
                     <svg viewBox="0 0 24 24">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -161,7 +142,6 @@
                     Google
                 </div>
 
-                <!-- Facebook Firebase Login Button -->
                 <div class="btn-social" onclick="loginWithFacebook()">
                     <svg viewBox="0 0 24 24">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/>
@@ -176,7 +156,6 @@
             </div>
         </div>
 
-        <!-- GOOGLE PLAY STORE COMPLIANCE DISCLAIMER -->
         <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin: 15px auto; max-width: 600px; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: justify;">
             <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are strictly skills-based eSports competitions.
         </div>
@@ -186,7 +165,6 @@
         </footer>
     </div>
 
-    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
     <div class="bottom-nav">
         <a href="index.html" class="nav-item">
             <span class="icon">🏠</span>
@@ -214,12 +192,20 @@
         // --- FIREBASE EMAIL/PASSWORD LOGIN ---
         document.getElementById('emailLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Temporary Fake Login if Firebase Config is empty
+            if(firebaseConfig.apiKey === "YOUR_API_KEY_HERE") {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = "index.html";
+                return;
+            }
+
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
 
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    alert("Login Successful!");
+                    localStorage.setItem('isLoggedIn', 'true');
                     window.location.href = "index.html";
                 })
                 .catch((error) => {
@@ -229,26 +215,30 @@
 
         // --- FIREBASE GOOGLE LOGIN ---
         function loginWithGoogle() {
+            if(firebaseConfig.apiKey === "YOUR_API_KEY_HERE") {
+                localStorage.setItem('isLoggedIn', 'true'); window.location.href = "index.html"; return;
+            }
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider)
                 .then((result) => {
+                    localStorage.setItem('isLoggedIn', 'true');
                     window.location.href = "index.html";
                 })
-                .catch((error) => {
-                    alert("Google Login Error: " + error.message);
-                });
+                .catch((error) => { alert("Google Login Error: " + error.message); });
         }
 
         // --- FIREBASE FACEBOOK LOGIN ---
         function loginWithFacebook() {
+            if(firebaseConfig.apiKey === "YOUR_API_KEY_HERE") {
+                localStorage.setItem('isLoggedIn', 'true'); window.location.href = "index.html"; return;
+            }
             const provider = new firebase.auth.FacebookAuthProvider();
             firebase.auth().signInWithPopup(provider)
                 .then((result) => {
+                    localStorage.setItem('isLoggedIn', 'true');
                     window.location.href = "index.html";
                 })
-                .catch((error) => {
-                    alert("Facebook Login Error: " + error.message);
-                });
+                .catch((error) => { alert("Facebook Login Error: " + error.message); });
         }
     </script>
 </body>
