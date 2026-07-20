@@ -46,13 +46,6 @@
         .form-control { width: 100%; padding: 12px 15px; background-color: #0a141d; border: 1px solid #2a3d4a; border-radius: 6px; color: #fff; font-size: 15px; transition: 0.3s; font-family: 'Roboto', sans-serif; box-shadow: inset 0 3px 6px rgba(0,0,0,0.6); }
         .form-control:focus { border-color: var(--accent-blue); outline: none; }
         
-        .qr-box { background-color: #0a141d; padding: 20px; text-align: center; border-radius: 8px; border: 1px dashed var(--accent-green); margin: 25px 0; box-shadow: inset 0 4px 10px rgba(0,0,0,0.6); }
-        
-        /* UPDATED RESPONSIVE QR IMAGE */
-        .qr-box img { width: 100%; max-width: 160px; height: auto; margin: 10px 0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        
-        .qr-text { color: var(--accent-green); font-weight: bold; font-size: 16px; margin-bottom: 5px; text-shadow: 0 1px 3px rgba(0,231,1,0.3); }
-        
         .discord-notice { background-color: rgba(20, 117, 225, 0.1); border-left: 4px solid var(--accent-blue); padding: 12px 15px; margin-bottom: 20px; font-size: 14px; border-radius: 0 6px 6px 0; }
         .btn-primary-large { display: block; width: 100%; background-color: var(--accent-blue); color: #fff; text-align: center; padding: 14px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 16px; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); }
         .btn-primary-large:active { transform: translateY(4px); }
@@ -63,7 +56,6 @@
             .register-section { padding: 15px; }
             .logo-text { font-size: 20px; }
             .header-logo { height: 35px; width: 35px; }
-            .qr-box { padding: 15px; }
         }
     </style>
 </head>
@@ -87,12 +79,12 @@
                     <label>Select Tournament</label>
                     <select id="tournamentSelect" name="Tournament" class="form-control" required>
                         <option value="" disabled selected>-- Choose a Tournament --</option>
-                        <option value="BGMI Classic Mega Match">BGMI Classic Mega Match (Entry: 100 INR)</option>
-                        <option value="BGMI Daily TDM Clash (4v4)">BGMI Daily TDM Clash 4v4 (Entry: 100 INR)</option>
-                        <option value="Free Fire Max Battle Royale">Free Fire Max Battle Royale (Entry: 100 INR)</option>
-                        <option value="Free Fire Max Clash Squad (4v4)">Free Fire Max Clash Squad 4v4 (Entry: 100 INR)</option>
-                        <option value="COD Mobile Battle Royale">COD Mobile Battle Royale (Entry: 100 INR)</option>
-                        <option value="COD Mobile Multiplayer (5v5)">COD Mobile Multiplayer 5v5 (Entry: 100 INR)</option>
+                        <option value="BGMI Classic Mega Match">BGMI Classic Mega Match (Entry: 100 FP)</option>
+                        <option value="BGMI Daily TDM Clash (4v4)">BGMI Daily TDM Clash 4v4 (Entry: 100 FP)</option>
+                        <option value="Free Fire Max Battle Royale">Free Fire Max Battle Royale (Entry: 100 FP)</option>
+                        <option value="Free Fire Max Clash Squad (4v4)">Free Fire Max Clash Squad 4v4 (Entry: 100 FP)</option>
+                        <option value="COD Mobile Battle Royale">COD Mobile Battle Royale (Entry: 100 FP)</option>
+                        <option value="COD Mobile Multiplayer (5v5)">COD Mobile Multiplayer 5v5 (Entry: 100 FP)</option>
                     </select>
                 </div>
 
@@ -121,13 +113,8 @@
                     <input type="text" id="player4" name="Player 4" class="form-control" placeholder="Enter Details" required>
                 </div>
 
-                <div class="qr-box">
-                    <div class="qr-text">Scan & Pay Entry Fee (100 INR)</div>
-                    <img src="qr.png" alt="Payment QR Code">
-                </div>
-
                 <div class="discord-notice">
-                    <strong>Important Step:</strong> Click "Submit Registration" below. Then, join our Discord and send your Payment Screenshot in the Ticket channel.
+                    <strong>Important Step:</strong> Click "Submit Registration" below. Then, join our Discord and open a ticket to verify your FP balance.
                 </div>
 
                 <button type="submit" class="btn-primary-large">Submit Registration</button>
@@ -150,12 +137,10 @@
         const player3 = document.getElementById('player3').value;
         const player4 = document.getElementById('player4').value;
 
-        // Tuhade provided Webhook URL
         const webhookURL = "https://discord.com/api/webhooks/1527673758494494871/ZNCbZOemk3FDrrZCWFfjMrtJGWufCdd9vPDIZ_DdcJudF8Zk5D_V28YRutPCqmdoZhkv"; 
 
-        // Added Tournament Field to the Discord Message
         const message = {
-            content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Tournament:** ${selectedTournament}\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for screenshot in #verify-payment ticket.*`
+            content: `🚨 **NEW TEAM REGISTRATION** 🚨\n**Tournament:** ${selectedTournament}\n**Team:** ${teamName}\n**Players:** 1.${player1}, 2.${player2}, 3.${player3}, 4.${player4}\n*Status: Waiting for FP verification in ticket.*`
         };
 
         const submitBtn = document.querySelector('button[type="submit"]');
@@ -168,7 +153,6 @@
             body: JSON.stringify(message)
         })
         .then(response => {
-            // Tuhada provided Discord Invite Link
             window.location.href = "https://discord.gg/uvYfD4smh5"; 
         })
         .catch(error => {
