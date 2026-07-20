@@ -7,10 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
+        /* --- CORE COLORS & STYLES --- */
         :root {
             --bg-body: #0a141d;
             --bg-card: #1a2c38;
             --bg-header: #0f212e;
+            --bg-menu: #10212d;
             --text-main: #ffffff;
             --text-muted: #b1bad3;
             --accent-blue: #1475e1;
@@ -20,19 +22,25 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); }
 
-        header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a3d4a; }
+        /* --- ON-LOAD ANIMATIONS --- */
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.1s; }
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* --- HEADER --- */
+        header { background-color: var(--bg-header); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a3d4a; position: sticky; top: 0; z-index: 10000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent-yellow); }
         .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; color: #fff; }
-        .back-btn { color: var(--text-main); text-decoration: none; font-weight: bold; }
+        .back-btn { color: var(--text-main); text-decoration: none; font-weight: bold; transition: 0.2s; }
+        .back-btn:hover { color: var(--accent-yellow); }
 
         .container { padding: 40px 20px; max-width: 800px; margin: 0 auto; }
-        .content-box { background-color: var(--bg-card); border-radius: 8px; padding: 30px; border: 1px solid #2a3d4a; }
+        .content-box { background-color: var(--bg-card); border-radius: 8px; padding: 30px; border: 1px solid #2a3d4a; box-shadow: 0 8px 25px rgba(0,0,0,0.6); }
         
         h1 { color: var(--accent-yellow); margin-bottom: 20px; }
         h2 { color: var(--accent-blue); margin-top: 25px; margin-bottom: 15px; }
         p { color: var(--text-muted); margin-bottom: 15px; line-height: 1.7; }
-        ul { margin-left: 20px; margin-bottom: 20px; color: var(--text-muted); }
+        ul { margin-left: 20px; margin-bottom: 20px; color: var(--text-muted); line-height: 1.6; }
         li { margin-bottom: 10px; }
         
         table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #0f212e; }
@@ -40,7 +48,24 @@
         th { background-color: #2a3d4a; }
 
         footer { text-align: center; padding: 40px 15px; color: var(--text-muted); font-size: 13px; }
-        .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; margin-bottom: 15px; }
+        .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; margin-bottom: 15px; font-weight: 900; }
+
+        /* ======================================================== */
+        /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
+        /* ======================================================== */
+        .bottom-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--bg-header); justify-content: space-around;
+            padding: 10px 0 15px 0; border-top: 1px solid #2a3d4a; z-index: 1000; box-shadow: 0 -8px 20px rgba(0,0,0,0.7);
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 700; gap: 4px; transition: 0.2s ease; }
+        .nav-item.active { color: var(--accent-yellow); transform: translateY(-2px); }
+        .nav-item .icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+
+        body.is-app { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; padding-bottom: 80px; }
+        body.is-app::-webkit-scrollbar { display: none; }
+        body.is-app .bottom-nav { display: flex; }
+        /* ======================================================== */
     </style>
 </head>
 <body>
@@ -53,32 +78,72 @@
         <a href="index.html" class="back-btn">&larr; Back Home</a>
     </header>
 
-    <div class="container">
+    <div class="container fade-in-up">
         <div class="content-box">
             <h1>Privacy Policy and Terms</h1>
             <p><strong>Effective Date:</strong> July 20, 2026</p>
             
             <h2>Terms of Service</h2>
-            <p>FukraGamerWorld is a skill-based esports platform. Participation is conducted using <strong>Fukra Points (FP)</strong>. FP has no real-world monetary value and cannot be withdrawn or converted to cash. Our platform is strictly for recreational and competitive esports.</p>
+            <p>FukraGamer.World is a skill-based esports platform. Participation is conducted using <strong>Fukra Points (FP)</strong>. FP has no real-world monetary value and cannot be withdrawn or converted to cash. Our platform is strictly for recreational and competitive esports.</p>
+            <p><strong>Age Restriction:</strong> Users must be 18 years of age or older to register, use this application, and participate in any tournaments.</p>
 
             <h2>Privacy Policy</h2>
             <p>We respect your privacy. We collect data (Name, In-game ID, Device info) only to improve matchmaking, prevent cheating, and ensure a fair environment. We never sell your personal data to third parties.</p>
 
+            <h2>Account & Data Deletion</h2>
+            <p>In compliance with Google Play Data Safety policies, users have the right to request the complete deletion of their account and associated data. To delete your account:</p>
+            <ul>
+                <li>Open a support ticket on our official Discord server.</li>
+                <li>Or contact us directly at: <strong>fukradriver.com</strong></li>
+            </ul>
+            <p>Upon request, all your personal data, gameplay history, and FP balance will be permanently erased from our active servers within 7-14 business days.</p>
+
             <h2>Rules of Conduct</h2>
             <ul>
-                <li>Cheating, hacking, or using unauthorized software leads to a permanent ban.</li>
+                <li>Cheating, hacking, or using unauthorized software (including emulators) leads to a permanent ban.</li>
                 <li>Multiple accounts are strictly prohibited.</li>
-                <li>FukraGamerWorld reserves the right to suspend accounts that violate community rules.</li>
+                <li>FukraGamer.World reserves the right to suspend accounts that violate community rules.</li>
             </ul>
 
-            <p>For support, contact us at: fukradriver.com</p>
+            <p style="margin-top: 30px;">For support, contact us at: <strong>fukradriver.com</strong></p>
         </div>
     </div>
 
     <footer>
         <div class="footer-logo">FukraGamer.World</div>
         <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
+        
+        <!-- GOOGLE PLAY STORE COMPLIANCE DISCLAIMER -->
+        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin: 15px auto; max-width: 600px; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: justify;">
+            <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are strictly skills-based eSports competitions.
+        </div>
     </footer>
+
+    <!-- APP BOTTOM NAVIGATION (Hidden in Web) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+        </a>
+        <a href="register.html" class="nav-item">
+            <span class="icon">🎮</span>
+            <span class="text">Play</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <span class="icon">🏆</span>
+            <span class="text">Ranks</span>
+        </a>
+        <a href="login.html" class="nav-item">
+            <span class="icon">👤</span>
+            <span class="text">Profile</span>
+        </a>
+    </div>
+
+    <script>
+        // --- DETECT ANDROID APP (WEBVIEW) MAGIC SCRIPT ---
+        const isApp = navigator.userAgent.includes('wv') || window.Android;
+        if (isApp) { document.body.classList.add('is-app'); }
+    </script>
 
 </body>
 </html>
