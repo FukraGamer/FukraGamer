@@ -14,12 +14,13 @@
     <script>
         // --- 1. APNE FIREBASE CONSOLE TON CONFIG ITHE PASTE KARO ---
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY_HERE",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDh9fddmorhCjLn9fwuyrtQgtf0n3NCqx8",
+            authDomain: "fukragamer-login-9696b.firebaseapp.com",
+            projectId: "fukragamer-login-9696b",
+            storageBucket: "fukragamer-login-9696b.firebasestorage.app",
+            messagingSenderId: "691754202599",
+            appId: "1:691754202599:web:b399b4448a0d8a36ae7942",
+            measurementId: "G-LBX2CKDNX9"
         };
         firebase.initializeApp(firebaseConfig);
 
@@ -28,8 +29,8 @@
             if (user) {
                 // User logged in hai, je oh login page te hai taan index te bhej do
                 const isApp = navigator.userAgent.includes('wv') || window.Android;
-                if (isApp && window.location.pathname.includes('login.html')) {
-                    // window.location.href = 'index.html'; 
+                if (window.location.pathname.includes('login.html')) {
+                    window.location.href = 'index.html'; 
                 }
             }
         });
@@ -171,7 +172,7 @@
             </div>
 
             <div class="auth-links">
-                Don't have an account? <a href="#">Sign up</a>
+                Don't have an account? <a href="signup.html">Sign up</a>
             </div>
         </div>
 
