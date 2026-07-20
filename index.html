@@ -146,8 +146,24 @@
         .sticky-sub { color: var(--accent-green); font-size: 12px; font-weight: 700; }
         .btn-yellow { background-color: var(--accent-yellow); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 14px; }
         
+        /* ======================================================== */
+        /* --- PLAY STORE COMPLIANT FOOTER --- */
+        /* ======================================================== */
         footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
         .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
+        
+        .playstore-disclaimer {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #888;
+            border: 1px solid #1a2a33;
+            text-align: justify;
+        }
+        /* ======================================================== */
 
         /* ======================================================== */
         /* --- NATIVE APP UI - HIDDEN BY DEFAULT (WEB MODE) --- */
@@ -460,14 +476,19 @@
                 <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number and on our Discord server exactly 15 minutes before the match starts.</p></div>
             </details>
 
+            <!-- PLAY STORE COMPLIANT FOOTER -->
             <footer class="fade-in-up delay-5">
                 <div class="footer-logo">FukraGamer.World</div>
                 <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
-                <br>
-                <p>
+                
+                <div class="playstore-disclaimer">
+                    <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are skills-based eSports competitions. Users must be 18 years or older to participate.
+                </div>
+
+                <p style="margin-top: 15px;">
                     <a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Privacy Policy</a> | 
-                    <a href="#" style="color: var(--text-muted); text-decoration: underline;">Anti-Cheat Rules</a> | 
-                    <a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Terms of Service</a>
+                    <a href="terms.html" style="color: var(--text-muted); text-decoration: underline;">Terms of Service</a> | 
+                    <a href="contact.html" style="color: var(--text-muted); text-decoration: underline;">Contact Us</a>
                 </p>
             </footer>
         </div>
