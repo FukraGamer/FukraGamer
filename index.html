@@ -602,5 +602,24 @@
             }, 2000);
         }
     </script>
+    
+    <!-- FIREBASE INITIALIZATION SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDh9fddmorhCjLn9fwuyrtQgtf0n3NCqx8",
+            authDomain: "fukragamer-login-9696b.firebaseapp.com",
+            projectId: "fukragamer-login-9696b",
+            storageBucket: "fukragamer-login-9696b.firebasestorage.app",
+            messagingSenderId: "691754202599",
+            appId: "1:691754202599:web:b399b4448a0d8a36ae7942",
+            measurementId: "G-LBX2CKDNX9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
 </body>
 </html>
