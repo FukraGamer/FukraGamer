@@ -7,6 +7,9 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
+    <!-- GOOGLE reCAPTCHA SCRIPT -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script>
         const isAppAuth = navigator.userAgent.includes('wv') || window.Android;
         const isLoggedInAuth = localStorage.getItem('isLoggedIn') === 'true';
@@ -450,6 +453,9 @@
                 <summary>How will I get Room ID and Password?</summary>
                 <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number and on our Discord server exactly 15 minutes before the match starts.</p></div>
             </details>
+
+            <!-- GOOGLE reCAPTCHA WIDGET -->
+            <div class="g-recaptcha" style="margin: 20px 0; display: flex; justify-content: center;" data-sitekey="6LeGDV0tAAAAAE5yEr-MwylShafcy3SxnrhxZCOH"></div>
 
             <footer class="fade-in-up delay-5">
                 <div class="footer-logo">FukraGamer.World</div>
