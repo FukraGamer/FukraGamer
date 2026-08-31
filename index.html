@@ -164,8 +164,51 @@
         .sticky-sub { color: var(--accent-green); font-size: 12px; font-weight: 700; }
         .btn-yellow { background-color: var(--accent-yellow); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 14px; }
         
-        footer { text-align: center; padding: 30px 15px; color: var(--text-muted); font-size: 13px; }
-        .footer-logo { font-family: 'Poppins', sans-serif; font-size: 28px; color: #fff; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
+        /* --- PREMIUM SUPERCELL-STYLE FOOTER --- */
+        .premium-footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 40px 20px 100px 20px;
+            font-family: 'Roboto', sans-serif;
+            border-top: 1px solid #2a3d4a;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-top {
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #2a3d4a; padding-bottom: 25px; margin-bottom: 25px; gap: 20px;
+        }
+        .social-section h4 { font-size: 14px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; }
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a { color: #fff; transition: 0.3s; }
+        .social-icons svg { width: 24px; height: 24px; fill: currentColor; }
+        .social-icons a:hover { color: var(--accent-yellow); transform: translateY(-3px); }
+
+        .store-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .store-btn {
+            display: flex; align-items: center; gap: 10px;
+            background-color: #000; border: 1px solid #fff; border-radius: 6px;
+            padding: 6px 14px; color: #fff; text-decoration: none; transition: 0.3s;
+        }
+        .store-btn:hover { background-color: #1a2c38; border-color: var(--accent-blue); }
+        .store-btn svg { width: 24px; height: 24px; }
+        .store-btn-text { display: flex; flex-direction: column; align-items: flex-start; }
+        .store-btn-text span:first-child { font-size: 10px; font-weight: 500; }
+        .store-btn-text span:last-child { font-size: 16px; font-weight: 700; font-family: 'Poppins', sans-serif; line-height: 1.1; }
+
+        .footer-links { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 35px; }
+        .footer-links a { color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent-blue); text-decoration: underline; }
+
+        .footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+        .footer-info { color: #888; font-size: 12px; line-height: 1.8; }
+        .footer-info a { color: #888; text-decoration: none; transition: 0.3s; }
+        .footer-info a:hover { color: #fff; }
+        .footer-brand { 
+            font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 900; 
+            color: #fff; letter-spacing: -1px; text-transform: uppercase; 
+            line-height: 0.9; text-align: right; text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+        }
 
         /* ======================================================== */
         /* --- APP SPECIFIC UI STYLES --- */
@@ -468,23 +511,67 @@
                 <div class="details-content"><p>The Room ID and Password will be shared on your registered WhatsApp number and on our Discord server exactly 15 minutes before the match starts.</p></div>
             </details>
 
-            <footer class="fade-in-up delay-5">
-                <div class="footer-logo">FukraGamer.World</div>
-                <p>2026 FukraGamer.World Esports | All Rights Reserved.</p>
-                
-                <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin: 15px auto; max-width: 600px; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: justify;">
-                    <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are strictly skills-based eSports competitions.
-                </div>
-
-                <br>
-                <p>
-                    <a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Privacy Policy</a> | 
-                    <a href="#" style="color: var(--text-muted); text-decoration: underline;">Anti-Cheat Rules</a> | 
-                    <a href="privacy-policy.html" style="color: var(--text-muted); text-decoration: underline;">Terms of Service</a>
-                </p>
-            </footer>
         </div>
-    </div> <a href="#top" class="scroll-top">^</a>
+        
+        <!-- NEW PREMIUM SUPERCELL-STYLE FOOTER -->
+        <footer class="premium-footer fade-in-up delay-5">
+            <div class="footer-top">
+                <div class="social-section">
+                    <h4>Follow us on</h4>
+                    <div class="social-icons">
+                        <a href="https://youtube.com/@fukragamer" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                        <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+                        <a href="https://discord.gg/3JK6Su4TS" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg></a>
+                    </div>
+                </div>
+                
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 384 512"><path fill="#fff" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.1-44.6-35.9-2.8-74.3 22.7-93.1 22.7-18.9 0-46.5-22.1-76.3-21.5-43.1.8-82.6 25-104.9 63.8-44.8 77.4-11.4 192.1 32.7 254.9 21.6 30.9 46.8 65.3 80.3 64.1 31.8-1.2 44.1-20.7 82.5-20.7 38.3 0 49.7 20.7 83 20.1 34.4-.6 56.4-32.2 77.7-63 26.1-37.8 37-74.6 37.6-76.6-1.1-.3-73.4-28.1-73.4-114.4zM245.9 83c20.1-24.3 33.6-58.1 29.9-91.9-28.8 1.2-64.1 19.3-84.9 43.6-16.6 19.3-32.3 54-27.7 87.2 32.1 2.5 62.7-14.6 82.7-38.9z"/></svg>
+                        <div class="store-btn-text">
+                            <span>Download on the</span>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.example.fukragamerworld" target="_blank" class="store-btn">
+                        <svg viewBox="0 0 512 512"><path fill="#fff" d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+                        <div class="store-btn-text">
+                            <span>GET IT ON</span>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 6px; margin: 0 0 25px 0; max-width: 100%; font-size: 11px; line-height: 1.5; color: #888; border: 1px solid #1a2a33; text-align: left;">
+                <b>Disclaimer:</b> Google LLC is not a sponsor of, nor in any way affiliated with, FukraGamer.World tournaments, contests, or prizes. All tournaments are strictly skills-based eSports competitions.
+            </div>
+
+            <div class="footer-links">
+                <a href="privacy-policy.html">Terms of Service</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="#">Parent's Guide</a>
+                <a href="#">Safe and Fair Play Policy</a>
+                <a href="#">Anti-Cheat Rules</a>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    FukraGamer.World Esports<br>
+                    Ludhiana, Punjab<br>
+                    India<br>
+                    Support: <a href="https://discord.gg/3JK6Su4TS" target="_blank">Discord Server</a><br>
+                    © 2026 FukraGamer.World
+                </div>
+                <div class="footer-brand">
+                    FUKRA<br>GAMER
+                </div>
+            </div>
+        </footer>
+
+    </div> 
+
+    <a href="#top" class="scroll-top">^</a>
 
     <div class="sticky-bottom">
         <div class="sticky-text">
